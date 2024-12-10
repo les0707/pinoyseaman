@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/addseaman.css">
+    <title>ADD Employer</title>
+</head>
+<body>
+            <nav>
+                <img src="images/logo.jpg" alt="" class="logo">
+    
+                <ul>
+                    <li><a href="index.html">Home</a> |</li>
+                    <li><a href="job_search.html">Job Search</a> |</li>
+                    <li><a href="#">Register as EMPLOYER</a> |</li>
+                    <li><a href="#">Register as Seanan</a> |</li>
+                    <li><a href="#">Company List</a> |</li>
+                    <li><a href="#">FAQ</a> |</li>
+                    <li><a href="#">Contact Us</a> </li>
+            </nav>  
+
+            <!-- under menu-nav banner  -->
+            <div class="banner-container">
+
+                <div class="first-banner">
+                    <img src="banner_rotate/marsa.jpg" alt="">
+                </div>
+            <!-- two banner-->
+                <div class="second-banner">
+                    <img src="ads/yourads2.jpg" alt="">
+                </div>
+            </div>
+
+<!-------------- company main content divider  ------------>
+        <div class="main-content">
+              
+            <div class="company-content"> 
+                <div class="company-header-container"> 
+                    <strong>Employer Registration (for Manning Agency registration only)</strong>
+                </div>
+
+                <div class="add-seaman-banner">
+                  <img src="images/seaman_pic.jpg" alt="">
+                </div>
+                
+                <div class="seaman-registration-form"> 
+                    <h2>Register as Seaman</h2>
+                        <hr>
+                        <form action="" method="POST">
+                            <div class="formbold-steps">
+                                <ul>
+                                    <li class="formbold-step-menu1 active">
+                                        <span>1</span>
+                                        Sign Up
+                                    </li>
+                                    <li class="formbold-step-menu2">
+                                        <span>2</span>
+                                        Passport & Seamans Book
+                                    </li>
+                                    <li class="formbold-step-menu3">
+                                        <span>3</span>
+                                        Confirm
+                                    </li>
+                                </ul>
+                            </div>
+                  
+                            <!------------------------------ STEP ONE --------------------------->
+                            <div class="formbold-form-step-1 active">
+
+                                <div class="custom-select">
+                                    <select>
+                                        <option value="">Select your desired Job Position: </option>
+                                        <option value="Rabbi">CLERGY - Rabbi</option>
+                                        <option value="Reverend">CLERGY - Reverend</option>
+                                        <option value="Longitude Conveyor Operator">CONSTRUCTION CREW - Longitude Conveyor Operator</option>
+                                        <option value="Repair Welder /  AWTI ">CONSTRUCTION CREW - Repair Welder /  AWTI </option>
+                                        <option value="Rigger Foreman">CONSTRUCTION CREW - Rigger Foreman</option>
+                                        <option value="Spacer">CONSTRUCTION CREW - Spacer</option>
+                                        <option value="Stalking Machine Operator">CONSTRUCTION CREW - Stalking Machine Operator</option>
+                                        <option value="Tension Machine Operator">CONSTRUCTION CREW - Tension Machine Operator</option>
+                                        <option value="Assistant">CREWING - Assistant</option>
+                                        <option value="Contractual for Visa Processing">CREWING - Contractual for Visa Processing</option>
+                                        <option value="Crew Manager">CREWING - Crew Manager</option>
+                                        <option value="Crewing Assistant">CREWING - Crewing Assistant</option>
+                                        <option value="Crewing Support Assistant">CREWING - Crewing Support Assistant</option>
+                                        <option value="Liaison and Documentation Officer">CREWING - Liaison and Documentation Officer</option>
+                                        <option value="Sr. Crewing Officer">CREWING - Sr. Crewing Officer</option>
+                                        <option value="Sr. Crewing Officer - Cement Fleet">CREWING - Sr. Crewing Officer - Cement Fleet</option>
+                                        <option value="Administrative Assistant">CRUISE STAFF - Administrative Assistant</option>
+                                        <option value="Aerobics Instructor">CRUISE STAFF - Aerobics Instructor</option>
+                                        <option value="Assistant Cruise Director">CRUISE STAFF - Assistant Cruise Director</option>
+                                        <option value="Cruise Director">CRUISE STAFF - Cruise Director</option>
+                                        <option value="Cruise Staff">CRUISE STAFF - Cruise Staff</option>
+                                        <option value="Fitness Instructor">CRUISE STAFF - Fitness Instructor</option>
+                                        <option value="Gentlemen Dance Host">CRUISE STAFF - Gentlemen Dance Host</option>
+                                        <option value="International Host Hostess">CRUISE STAFF - International Host Hostess</option>
+                                    </select>
+                                  </div>
+
+                            <div class="formbold-input-flex">
+                                <div>
+                                    <label for="firstname" class="formbold-form-label"> First name </label>
+                                    <input type="text" placeholder="Juan" class="formbold-form-input" placeholder="Juan"/>
+                                </div>
+                                <div>
+                                    <label for="lastname" class="formbold-form-label"> Middle name </label>
+                                    <input type="text" name="middle_name" class="formbold-form-input" placeholder="Dela"/>
+                                </div>
+
+                                <div>
+                                    <label for="lastname" class="formbold-form-label"> Last name </label>
+                                    <input type="text" name="lastname_name" class="formbold-form-input" placeholder="Cruz"/>
+                                </div>
+                            </div>
+                      
+                            <div class="formbold-input-flex">
+                                <div>
+                                    <small id="dob-error" style="color: red; display: none;">The birth year must only be 4 digits.</small>
+                                    <label for="dob" class="formbold-form-label"> Date of Birth </label>
+                                    <input type="date" name="date" class="formbold-form-input"/>
+                                </div>
+    
+                                <div>
+                                    <label for="lastname" class="formbold-form-label"> Gender </label>
+                                    <select name="gender" class="formbold-form-input">
+                                        <option value="">-Select Gender-</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Diverse">Diverse</option>
+                                    </select>
+                                </div>
+    
+                                <div>
+                                    <label for="email" class="formbold-form-label"> Email Address </label>
+                                    <input type="email" name="email" placeholder="example@mail.com" class="formbold-form-input"/>
+                                </div>
+                            </div>
+                      
+                            <div>
+                                <label for="address" class="formbold-form-label"> Address </label>
+                                <input type="text" name="address" placeholder="Dian street, Makati City." class="formbold-form-input"/>
+                            </div>
+
+                              <div>
+                                <label for="address" class="formbold-form-label"> Re-type Email Address </label>
+                                <input type="email" name="email" placeholder="This will serve as your pinoyseaman login email" class="formbold-form-input" />
+                            </div>
+
+                        </div>
+                  
+                          <!------------------------------ STEP TWO --------------------------->
+                        <div class="formbold-form-step-2">
+
+                            <h2>Passport Information</h2>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> Country: </label>
+                                <input type="text" name="passport_country" placeholder="ex: Philippines" class="formbold-form-input"/>
+                            </div>
+  
+                            <div>
+                                <label for="address" class="formbold-form-label"> No: </label>
+                                <input type="text" name="passport_no" placeholder="passport ID" class="formbold-form-input"/>
+                            </div>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> Issued: </label>
+                                <input type="text" name="passport_issued" placeholder="Date and year issued" class="formbold-form-input"/>
+                            </div>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> Valid: </label>
+                                <input type="text" name="passport_valid" placeholder="Valid until" class="formbold-form-input" />
+                            </div>
+
+                            <br>
+                            <hr>
+                            <br>
+                          <h2>Seaman's Book Information</h2>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> Country: </label>
+                                <input type="text" name="passport_country" placeholder="ex: Philippines" class="formbold-form-input"/>
+                            </div>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> No: </label>
+                                <input type="text" name="passport_no" placeholder="Seaman's Book ID" class="formbold-form-input"/>
+                            </div>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> Issued: </label>
+                                <input type="text" name="passport_issued" placeholder="Date and year issued" class="formbold-form-input"/>
+                            </div>
+
+                            <div>
+                                <label for="address" class="formbold-form-label"> Valid: </label>
+                                <input type="text" name="passport_valid" placeholder="Valid until" class="formbold-form-input" />
+                            </div>
+
+                        </div>
+                  
+                           <!------------------------------ STEP THREE --------------------------->
+                            <div class="formbold-form-step-3">
+                                <div class="formbold-form-confirm">
+                                    <div>
+                                        <label for="message" class="form-sample-label"> Details of your past and present Seagoing Work Experiences:</label>
+                                        <p class="sample-format">Sample Format : <br>
+                                            Manning Agency : PinoySeaman Shipping <br>
+                                            Name of Vessel : M/V <br> 
+                                            Majestic Vessel Type : General Cargo<br>
+                                            GRT : 32,777 <br>
+                                            Rank : A/B <br>
+                                            Sign On : Sept. 19, 2023<br>
+                                            Sign Off : March 19, 2024"</p>
+                                        <textarea
+                                          rows="4"
+                                          name="message"
+                                          id="message"
+                                          class="formbold-form-input"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="formbold-form-confirm">
+                                    <div>
+                                        <label for="message" class="form-sample-label">Details of your Non-Seagoing Work Experiences:</label>
+                                        <p class="sample-format">Sample Format : <br>
+                                            Company : Jollibee <br>
+                                            Position : Service Crew<br> 
+                                            From : Sept. 19, 2022<br>
+                                            To : Sept. 19, 2023
+                                        </p>
+                                        <textarea
+                                          rows="4"
+                                          name="message"
+                                          id="message"
+                                          class="formbold-form-input"
+                                        ></textarea>
+                                      </div>
+                                </div>
+
+                                <div class="formbold-form-confirm">
+                                    <div>
+                                        <label for="message" class="form-sample-label">Education and Training:</label>
+                                        <textarea
+                                          rows="4"
+                                          name="message"
+                                          id="message"
+                                          class="formbold-form-input"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="formbold-form-confirm">
+                                    <div>
+                                        <label for="message" class="form-sample-label">Merits, Rewards, Titles, Hobbies, Interest:</label>
+                                        <textarea
+                                          rows="4"
+                                          name="message"
+                                          id="message"
+                                          class="formbold-form-input"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="formbold-form-confirm">
+                                    <div class="formbold-form-file-flex">
+                                        <label for="upload" class="formbold-form-label">
+                                            Upload your License, Competency, U.S. Visa, Schengen Visa:
+                                        </label>
+                                        <input type="file" name="upload" class="formbold-form-file"/>
+                                    </div>
+                                </div>
+
+                                <div class="formbold-form-confirm">
+                                    <div class="formbold-form-file-flex">
+                                        <label for="upload" class="formbold-form-label">
+                                            Upload your Certificates :
+                                        </label>
+                                        <input type="file" name="upload" class="formbold-form-file"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group terms">
+                                    <input type="checkbox" id="terms" name="terms" >
+                                    <label for="terms" class="add-label">
+                                        Allow Employer to view my profile and include me on manual job search.
+                                    </label>
+                                    <br>
+                                    <br>
+                                    <input type="checkbox" id="terms" name="terms" >
+                                    <label for="terms" class="add-label">
+                                        I have read and agreed on the <a href="#">TERMS and CONDITIONS</a> of PinoySeaman.com 
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="formbold-form-btn-wrapper">
+                              <button class="formbold-back-btn">
+                                Back
+                                </button>
+                    
+                              <button class="formbold-btn">
+                                Next Step
+                              </button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+<!-------------- Below code is for side content  ----------->
+        <form action="" method="post">
+                <div class="side-content">
+
+                    <div class="employer">
+                        <!--container seaman and employer log in-->
+                        <div class="category">
+                            <strong>Employer Login</strong>
+
+                                    <div class="input-fields">
+                                        <label>Employer ID: </label><br>
+                                        <input type="text"><br>
+                                        <label>Password: </label> <br>
+                                        <input type="password"> <br>
+                                        <input type="submit" value="login" name="submit"> <br>
+                                        <a href="#">Forgot Employer ID/Password?</a> <br>
+                                        <a href="#">Register Now</a>
+                                    </div>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="employer">
+                        <!--container seaman and employer log in-->
+                        <div class="category">
+                            <strong>Seaman Login</strong>
+                                    <div class="input-fields">
+                                        <label>Email: </label> <br> 
+                                        <input type="text"><br>
+                                        <label>Password: </label><br>
+                                        <input type="password"> <br>
+                                        <input type="submit" value="login" name="submit"> <br>
+                                        <a href="#">Forgot your Password?</a> <br>
+                                        <a href="#">Register Now</a>
+                                    </div>
+                        </div>
+                    </div>
+        
+                    <div class="database">
+                        <!--container database record-->
+                        <div class="category">
+                            <strong>Database Records</strong><br> 
+                                <span class="span-style"> <a href="#">Registered Seaman :</a> 128574</span>
+                                <span class="span-style"><a href="#">Registered Company: </a> 224 </span><br>
+                                <span class="span-style"><a href="#">Job Posted: </a>1304</span>
+                        </div>
+
+                    </div>
+
+                    <div class="database">
+                        <!--container new seaman member -->
+                        <div class="category">
+                            <strong>Newest Seaman member</strong> <br>
+                                <span>
+                                    <strong class="database-strong">Name: </strong> <br>
+                                    <strong class="database-strong">Position: </strong> <br>
+                                    <strong class="database-strong">Date Registered: </strong>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="random-images">
+                        <!--container random images-->
+                        <div class="category">
+                            <strong>Random Images</strong>
+                            <div class="image-container">
+                                <img src="seaman_pics/10.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+
+                            <div class="submit-photo">
+                                <a href="">Submit a photo</a>
+                            </div>
+        </form>
+
+                        <div class="advertisement">
+                            <strong>Advertisement</strong>
+                        </div>
+
+                    <div class="ads-container">
+                            <img src="images/yourads.jpg" alt="">
+
+                    </div>
+
+                    <div class="ads-container">
+                            <img src="images/yourads.jpg" alt="">
+                    </div>
+
+                    <div class="ads-container">
+                            <img src="images/yourads.jpg" alt="">
+                    </div>
+                    
+                    
+                </div>
+
+            </div>
+    <!-- companies/hiring & register signin -->
+
+    <!-- Footer section -->
+    <footer class="footer">
+        <strong>Trabahong seaman, isang click na lang!</strong>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="#">Home</a> |</li>
+                <li><a href="#">Company List</a> |</li>
+                <li><a href="#">FAQ</a> |</li>
+                <li><a href="#">Submit Resume</a> |</li>
+                <li><a href="#">Contact Us</a> |</li>
+                <li><a href="#">Advertise</a> |</li>
+                <li><a href="#">Terms and Conditions</a> |</li>
+            </ul>
+        <p>Email: info@pinoyseaman.com</p>
+        <p>&copy; Copyright 2024 PinoySeaman.com</p>
+    </footer>
+
+    <script src="js/add_employer.js"></script>
+</body>
+</html>
