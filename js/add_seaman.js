@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
         // Show or hide the "Back" button
         if (currentStep > 0) {
-            backButton.style.display = "inline-block"; // Show the Back button on Step 2 and 3
+            backButton.style.display = "inline-block"; // Show the Back button on Step 2 and 3~
         } else {
             backButton.style.display = "none"; // Hide the Back button on Step 1
         }
