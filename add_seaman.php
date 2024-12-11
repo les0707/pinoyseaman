@@ -285,6 +285,8 @@ include 'includes/nav.php';
                               <button class="formbold-btn" id="next-button">
                                 Next Step
                               </button>
+
+                              <button type="submit" id="submit-button" class="formbold-submit-btn" style="display: none;">Submit</button>
                             </div>
 
                         </form>
