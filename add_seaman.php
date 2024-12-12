@@ -294,6 +294,5 @@ include 'includes/nav.php';
     </div>
     <?php include 'includes/aside.php' ?>
   </div>
-  <script src="js/add_seaman.js"></script>
 </body>
 <?php include 'includes/footer.php' ?>

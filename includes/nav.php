@@ -16,10 +16,11 @@
 <div class="banner-container">
 
     <div class="first-banner">
-        <img src="banner_rotate/marsa.jpg" alt="">
+        <a href=""><img src="banner_rotate/marsa.jpg" alt="Banner 1"></a>
     </div>
+
     <div class="second-banner">
         <img src="ads/yourads2.jpg" alt="">
     </div>
-    
+
 </div>
