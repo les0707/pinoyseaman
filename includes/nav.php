@@ -16,7 +16,7 @@
 <div class="banner-container">
 
     <div class="first-banner">
-        <a href=""><img src="banner_rotate/marsa.jpg" alt="Banner 1"></a>
+    <a href=""><img src="" alt="Random Banner"></a>
     </div>
 
     <div class="second-banner">
