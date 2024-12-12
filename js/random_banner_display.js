@@ -1,20 +1,29 @@
-// List of banners
-const firstBannerFolder = 'banner_rotate';
-const secondBannerFolder = 'ads';
+const firstBannerFolder = 'banner_rotate/';  // Folder containing the images
+let firstBannerImages = [];
 
-// Array of image files (for demo purposes, you can dynamically generate this list from your server)
-const firstBannerImages = ['marsa.jpg', 'example1.jpg', 'example2.jpg']; // Replace with actual file names
-const secondBannerImages = ['yourads2.jpg', 'yourads3.jpg', 'yourads4.jpg']; // Replace with actual file names
+// Fetch image filenames from the server
+fetch('includes/banner_rotate.php')
+    .then(response => response.json())
+    .then(images => {
+        firstBannerImages = images;
 
+        // Start the banner rotation only after fetching the images
+        changeBanners();
+        setInterval(changeBanners, 120000); // Update banners every 2 minutes (120,000 ms)
+    })
+    .catch(error => console.error('Error fetching images:', error));
+
+// Function to change the banners dynamically
 function changeBanners() {
-    // Randomly select a banner for each container
+    if (firstBannerImages.length === 0) return;  // No images available
+
+    // Randomly select an image from the list
     const firstBanner = firstBannerImages[Math.floor(Math.random() * firstBannerImages.length)];
-    const secondBanner = secondBannerImages[Math.floor(Math.random() * secondBannerImages.length)];
 
-    // Change the images dynamically
-    document.getElementById('first-banner').src = firstBannerFolder + firstBanner;
-    document.getElementById('second-banner').src = secondBannerFolder + secondBanner;
+    // Update the `src` and `alt` of the image inside the `.first-banner` div
+    const firstBannerImageElement = document.querySelector('.first-banner img');
+    if (firstBannerImageElement) {
+        firstBannerImageElement.src = firstBannerFolder + firstBanner;
+        firstBannerImageElement.alt = firstBanner;  // Dynamically set the alt text to the image file name
+    }
 }
-
-// Change banners every 5 minutes (300000 milliseconds)
-setInterval(changeBanners, 300000); // 5 minutes in milliseconds

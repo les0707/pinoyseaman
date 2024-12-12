@@ -285,6 +285,8 @@ include 'includes/nav.php';
                               <button class="formbold-btn" id="next-button">
                                 Next Step
                               </button>
+
+                              <button type="submit" id="submit-button" class="formbold-btn">Submit</button>
                             </div>
 
                         </form>
@@ -292,6 +294,5 @@ include 'includes/nav.php';
     </div>
     <?php include 'includes/aside.php' ?>
   </div>
-  <script src="js/add_seaman.js"></script>
 </body>
 <?php include 'includes/footer.php' ?>

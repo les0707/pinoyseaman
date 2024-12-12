@@ -65,7 +65,7 @@ include 'includes/nav.php';
     </div>
 
     <?php include 'includes/aside.php' ?>
-
+    
   </div>
 </body>
 <?php include 'includes/footer.php' ?>

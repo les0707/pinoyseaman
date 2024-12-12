@@ -50,18 +50,37 @@ nav .logo{
     padding-bottom: 5px;
 }
 
-.first-banner, .second-banner {
-    flex-direction: column;
+.first-banner {
+    width: 510px; /* Set the width of the banner */
+    height: 182px; /* Set the height of the banner */
     overflow: hidden; /* Ensure no overflow for images */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.first-banner img, .second-banner img {
-    width: 100%; /* Make images fill the container width */
-    height: 100%; /* Allow height to adjust proportionally */
+.first-banner img {
+    width: 510px; /* Force the image width to 510px */
+    height: 182px; /* Force the image height to 182px */
     object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+    display: block; /* Remove inline spacing if any */
+    
+}
+
+.second-banner {
+    width: 400px; /* Set the width of the banner */
+    height: 182px; /* Set the height of the banner */
+    overflow: hidden; /* Ensure no overflow for images */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.second-banner img {
+    width: 400px; /* Force the image width to 510px */
+    height: 182px; /* Force the image height to 182px */
+    object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+    display: block; /* Remove inline spacing if any */
 }
     
 
@@ -177,14 +196,12 @@ nav .logo{
 
 .column p {
     display: block;
-    margin-bottom: 10px;
-    text-decoration: none;
+    margin-bottom: 15px;
 }
 
 .column a {
     display: block;
-    margin-bottom: 10px;
-    text-decoration: none;
+    margin-bottom: 15px;
 }
 
 /* side main div content  styling */
@@ -1241,9 +1258,9 @@ h3{
         font-size: 16px; 
     }
 
-    .add-seaman-banner {
+    .add-seaman-banner img{
         width: 100%; 
-        max-width: 100%; 
+        height: auto;
         margin-left: 7px;
         padding-right: 31px;
     }
@@ -1501,6 +1518,14 @@ h3{
 
     .side-input{
         width: 100%;
+    }
+
+    .column div{
+        flex: 1;
+        width: 100%;
+        font-size: 15px;
+        margin: 5px;
+        border-bottom: 2px solid #DDE3EC;
     }
 
 }
