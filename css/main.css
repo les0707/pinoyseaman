@@ -1339,7 +1339,7 @@ h3{
     /*------------banner container------------*/
 
 
-    .first-banner, .second-banner {
+    .first-banner .second-banner {
         padding: 3px;
         width: 100%; 
         font-size: 24pt; 
