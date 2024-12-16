@@ -115,9 +115,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Submit form via AJAX
     function submitForm() {
-        const formData = new FormData(document.getElementById("seaman-form")); // FormData for uploading files
+        const formData = new FormData(document.getElementById("register_seaman")); // FormData for uploading files
   
-        fetch('process_form.php', { // Change this to the PHP script that handles form submission
+        fetch('includes/add_seaman_now.inc.php', { // Change this to the PHP script that handles form submission
             method: 'POST',
             body: formData
         })
