@@ -3,6 +3,11 @@
 include 'includes/dbh.inc.php';
 include 'includes/header.php';
 include 'includes/nav.php';
+
+// Query to get the job positions ordered by category and job
+// $query = "SELECT category, job FROM seaman_jobs ORDER BY category ASC, job ASC";
+// $result = mysqli_query($conn, $query);
+
 ?>
 
 <body>
@@ -71,7 +76,7 @@ include 'includes/nav.php';
                                         <option value="Gentlemen Dance Host">CRUISE STAFF - Gentlemen Dance Host</option>
                                         <option value="International Host Hostess">CRUISE STAFF - International Host Hostess</option>
                                     </select>
-                                  </div>
+                                </div>
 
                             <div class="formbold-input-flex">
                                 <div>
