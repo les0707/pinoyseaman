@@ -1,6 +1,5 @@
 <?php
-// include 'connect.php';
-include 'includes/dbh.inc.php';
+include 'connect.php';
 include 'includes/header.php';
 include 'includes/nav.php';
 ?>
@@ -22,7 +21,7 @@ include 'includes/nav.php';
       <div class="seaman-registration-form"> 
                     <h2>Register as Seaman</h2>
                         <hr>
-                        <form name="register_seaman" id="register_seaman">
+                        <form action="add_seaman_now.php" method="post" name="register_seaman" id="register_seaman">
                             <div class="formbold-steps">
                                 <ul>
                                     <li class="formbold-step-menu1 active">
