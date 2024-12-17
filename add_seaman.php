@@ -14,6 +14,16 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
+    <!-- Loader -->
+<div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:1000; text-align:center;">
+    <div style="margin-top:20%; font-size:20px; font-weight:bold;">
+        <p>Processing...</p>
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
   <div class="main-content">
 
     <div class="company-content">

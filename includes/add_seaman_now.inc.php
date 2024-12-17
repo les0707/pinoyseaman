@@ -1,6 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieving form data
     $prefer_job = trim($_POST["prefer_job"]);
     $first_name = trim($_POST["first_name"]);
     $middle_name = trim($_POST["middle_name"]);
@@ -25,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $merits = trim($_POST["merits"]);
     $currentDate = date("Y-m-d");
 
-    // Normalize first, last, and middle names
+    // Normalize names
     $first_name = ucwords(strtolower($first_name)); 
     $last_name = ucwords(strtolower($last_name));
 
@@ -104,12 +109,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdo = null;
         $stmt = null;
 
-        // Return success response
-        echo json_encode([
-            "success" => true,
-            "message" => "Form submitted successfully."
-        ]);
-        exit;
+        // Send emails using PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            // SMTP Configuration
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'esclanda97@gmail.com'; // Your Gmail email
+            $mail->Password = 'vfqm lavl njrx hiqr';   // Gmail App Password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Sender (No-reply email)
+            $mail->setFrom('no-reply@pinoyseaman.com', 'PinoySeaman');
+            $mail->addReplyTo('no-reply@pinoyseaman.com', 'PinoySeaman');
+
+            // Send email to user
+            // $mail->setFrom('esclanda97@gmail.com', 'PinoySeaman');
+            $mail->addAddress($email, $first_name);
+            $mail->isHTML(true);
+            $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
+            $mail->Body = "
+                <p>Hello $first_name,</p>
+                <p>Welcome to PinoySeaman! Your account has been created successfully.</p>
+                <p>Your email: <strong>$email</strong></p>
+                <p>Your password: <strong>$newid</strong></p>
+                <p>Thank you for joining us!</p>";
+
+            $mail->send();
+
+            // Send email to admin
+            $mail->clearAddresses(); // Clear recipient list
+            $mail->addAddress('esclanda97@gmail.com'); // Admin email
+            $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
+            $mail->Body = "
+                <p>A new seaman has registered on PinoySeaman:</p>
+                <p>Name: $first_name $middle_name $last_name</p>
+                <p>Email: $email</p>
+                <p>Cellphone: $cellphone</p>
+                <p>ID: $newid</p>";
+
+            $mail->send();
+
+            // Return success response
+            echo json_encode([
+                "success" => true,
+                "message" => "Form submitted successfully and emails have been sent."
+            ]);
+            exit;
+
+        } catch (Exception $e) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Email error: {$mail->ErrorInfo}"
+            ]);
+            exit;
+        }
 
     } catch (PDOException $e) {
         // Handle query errors
@@ -128,3 +184,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ]);
     exit;
 }
+?>

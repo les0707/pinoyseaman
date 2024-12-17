@@ -116,6 +116,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Submit form via AJAX
     function submitForm() {
         const formData = new FormData(document.getElementById("register_seaman")); // FormData for uploading files
+        const loader = document.getElementById("loader");
+
+        // Show loader before starting the request
+        loader.style.display = "block";
   
         fetch('includes/add_seaman_now.inc.php', { // Change this to the PHP script that handles form submission
             method: 'POST',
@@ -123,9 +127,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json()) // Expecting JSON response
         .then(data => {
+
+            // Hide loader after receiving response
+            loader.style.display = "none";
+
             if (data.success) {
-                alert("Form submitted successfully!");
-                // Optionally redirect or clear form
+                alert("Registration successful! \nPlease check your email (also Spam folder) for your auto-generated password.");
+                window.location.href = 'index.php';
             } else {
                 alert("Error: " + data.message);
             }
