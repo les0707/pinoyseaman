@@ -1,11 +1,27 @@
 <?php
-// include 'connect.php';
-include 'includes/dbh.inc.php';
+include 'connect.php';
 include 'includes/header.php';
 include 'includes/nav.php';
+
+// Fetch job categories and job positions from the database
+$query = "SELECT category, job FROM seaman_jobs ORDER BY category ASC, job ASC";
+$stmt = $pdo->prepare($query);
+$stmt->execute();
+$jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <body>
+
+    <!-- Loader -->
+<div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:1000; text-align:center;">
+    <div style="margin-top:20%; font-size:20px; font-weight:bold;">
+        <p>Processing...</p>
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
 
   <div class="main-content">
 
@@ -22,7 +38,7 @@ include 'includes/nav.php';
       <div class="seaman-registration-form"> 
                     <h2>Register as Seaman</h2>
                         <hr>
-                        <form name="register_seaman" id="register_seaman">
+                        <form action="add_seaman_now.php" method="post" name="register_seaman" id="register_seaman">
                             <div class="formbold-steps">
                                 <ul>
                                     <li class="formbold-step-menu1 active">
@@ -43,35 +59,16 @@ include 'includes/nav.php';
                             <!------------------------------ STEP ONE --------------------------->
                             <div class="formbold-form-step-1 active">
 
-                                <div class="custom-select">
-                                    <select name="prefer_job" id="prefer_job" class="formbold-form-input">
-                                        <option value="">Select your desired Job Position: </option>
-                                        <option value="Rabbi">CLERGY - Rabbi</option>
-                                        <option value="Reverend">CLERGY - Reverend</option>
-                                        <option value="Longitude Conveyor Operator">CONSTRUCTION CREW - Longitude Conveyor Operator</option>
-                                        <option value="Repair Welder /  AWTI ">CONSTRUCTION CREW - Repair Welder /  AWTI </option>
-                                        <option value="Rigger Foreman">CONSTRUCTION CREW - Rigger Foreman</option>
-                                        <option value="Spacer">CONSTRUCTION CREW - Spacer</option>
-                                        <option value="Stalking Machine Operator">CONSTRUCTION CREW - Stalking Machine Operator</option>
-                                        <option value="Tension Machine Operator">CONSTRUCTION CREW - Tension Machine Operator</option>
-                                        <option value="Assistant">CREWING - Assistant</option>
-                                        <option value="Contractual for Visa Processing">CREWING - Contractual for Visa Processing</option>
-                                        <option value="Crew Manager">CREWING - Crew Manager</option>
-                                        <option value="Crewing Assistant">CREWING - Crewing Assistant</option>
-                                        <option value="Crewing Support Assistant">CREWING - Crewing Support Assistant</option>
-                                        <option value="Liaison and Documentation Officer">CREWING - Liaison and Documentation Officer</option>
-                                        <option value="Sr. Crewing Officer">CREWING - Sr. Crewing Officer</option>
-                                        <option value="Sr. Crewing Officer - Cement Fleet">CREWING - Sr. Crewing Officer - Cement Fleet</option>
-                                        <option value="Administrative Assistant">CRUISE STAFF - Administrative Assistant</option>
-                                        <option value="Aerobics Instructor">CRUISE STAFF - Aerobics Instructor</option>
-                                        <option value="Assistant Cruise Director">CRUISE STAFF - Assistant Cruise Director</option>
-                                        <option value="Cruise Director">CRUISE STAFF - Cruise Director</option>
-                                        <option value="Cruise Staff">CRUISE STAFF - Cruise Staff</option>
-                                        <option value="Fitness Instructor">CRUISE STAFF - Fitness Instructor</option>
-                                        <option value="Gentlemen Dance Host">CRUISE STAFF - Gentlemen Dance Host</option>
-                                        <option value="International Host Hostess">CRUISE STAFF - International Host Hostess</option>
-                                    </select>
-                                  </div>
+                            <div class="custom-select">
+                                <select name="prefer_job" id="prefer_job" class="formbold-form-input">
+                                    <option value="">Select your desired Job Position: </option>
+                                    <?php foreach ($jobs as $job): ?>
+                                    <option value="<?= htmlspecialchars($job['job']) ?>">
+                                        <?= htmlspecialchars($job['category']) . " - " . htmlspecialchars($job['job']) ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
                             <div class="formbold-input-flex">
                                 <div>
