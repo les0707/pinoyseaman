@@ -41,63 +41,72 @@
     </form>
 
     <div class="database">
-      <!--container database record-->
-      <div class="category">
+    <!--container database record-->
+    <div class="category">
         <strong>Database Records</strong>
         <?php
+            include 'dbh.inc.php'; // Include your database connection file
 
-        $link = mysqli_connect($dbhost, $dbusername, $dbuserpassword, $dbname)
-          or die("Error connecting to the database: " . mysqli_connect_error());
+            // Use the PDO connection
+            $query = "SELECT * FROM pinoystats";
+            $stmt = $pdo->query($query);
 
-        $query = "SELECT * FROM pinoystats";
-
-        $result = mysqli_query($link, $query) or die("Error executing query: " . mysqli_error($link));
-
-        $row = mysqli_fetch_array($result);
+            if ($stmt) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($row) {
+                    ?>
+                    <div class="data-record">
+                        <strong><a href="seaman_list.php">Registered Seaman :</a> </strong> <span><?php echo $row["seaman"]; ?></span>
+                        <strong><a href="company_list.php">Registered Company: </a> </strong> <span><?php echo $row["employer"]; ?></span><br>
+                        <strong><a href="job_search.php">Job Posted: </a></strong> <span><?php echo $row["jobs"]; ?></span>
+                    </div>
+                    <?php
+                } else {
+                    echo "No records found in pinoystats table.";
+                }
+            } else {
+                echo "Error executing query: " . $pdo->errorInfo();
+            }
         ?>
-        </div>
-          <div class="data-record">
-            <strong><a href="seaman_list.php">Registered Seaman :</a> </strong> <span><?php echo $row["seaman"]; ?></span>
-            <strong><a href="company_list.php">Registered Company: </a> </strong> <span><?php echo $row["employer"]; ?></span><br>
-            <strong><a href="job_search.php">Job Posted: </a></strong> <span><?php echo $row["jobs"]; ?></span>
-          </div>
     </div>
+</div>
+
 
     <div class="database">
-      <!--container new seaman member -->
-      <div class="category">
-        <strong>Newest Seaman member</strong>
-          <?php
-          $link = new mysqli($dbhost, $dbusername, $dbuserpassword, $dbname);
-          if ($link->connect_error) {
-            die("Connection failed: " . $link->connect_error);
-          }
+        <!--container new seaman member -->
+        <div class="category">
+            <strong>Newest Seaman member</strong>
+            <?php
+            include 'dbh.inc.php'; // Include your database connection file
 
-          $query = "SELECT first_name, last_name, prefer_job, date FROM job_seeker ORDER BY code DESC LIMIT 1";
-          $result = $link->query($query);
+            // Use the PDO connection
+            $query = "SELECT first_name, last_name, prefer_job, date FROM job_seeker ORDER BY code DESC LIMIT 1";
+            $stmt = $pdo->query($query);
 
-          if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $name = ucwords(strtolower($row["first_name"]) . " " . strtolower($row["last_name"]));
-            $position = htmlspecialchars($row["prefer_job"], ENT_QUOTES, 'UTF-8');
-            $date_registered = htmlspecialchars($row["date"], ENT_QUOTES, 'UTF-8');
-          } else {
-            $name = "No data available";
-            $position = "No data available";
-            $date_registered = "No data available";
-          }
+            if ($stmt) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($row) {
+                    $name = ucwords(strtolower($row["first_name"]) . " " . strtolower($row["last_name"]));
+                    $position = htmlspecialchars($row["prefer_job"], ENT_QUOTES, 'UTF-8');
+                    $date_registered = htmlspecialchars($row["date"], ENT_QUOTES, 'UTF-8');
+                } else {
+                    $name = "No data available";
+                    $position = "No data available";
+                    $date_registered = "No data available";
+                }
+            } else {
+                echo "Error executing query: " . $pdo->errorInfo();
+            }
 
-          $result->free();
-          $link->close();
-
-          ?>
+            ?>
         </div>
-          <div class="data-record">
-          <strong class="record-style">Name: </strong> <span><?php echo $name; ?></span><br>
-          <strong class="record-style">Position: </strong> <span><?php echo $position; ?></span> <br>
-          <strong class="record-style">Date Registered: </strong> <span><?php echo $date_registered; ?></span>
-          </div>
+        <div class="data-record">
+            <strong class="record-style">Name: </strong> <span><?php echo $name; ?></span><br>
+            <strong class="record-style">Position: </strong> <span><?php echo $position; ?></span><br>
+            <strong class="record-style">Date Registered: </strong> <span><?php echo $date_registered; ?></span>
+        </div>
     </div>
+
 
     <div class="random-images">
       <!--container random images-->

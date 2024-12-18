@@ -246,20 +246,30 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
 
                                 <div class="formbold-form-confirm">
-                                    <div class="formbold-form-file-flex">
-                                        <label for="upload" class="formbold-form-label">
-                                            Upload your License, Competency, U.S. Visa, Schengen Visa:
+                                    <div>
+                                        <label for="message" class="form-sample-label">
+                                        License, Competency, U.S. Visa, Schengen Visa :
                                         </label>
-                                        <input type="file" name="competence" id="competence" class="formbold-form-file"/>
+                                        <textarea
+                                          name="competence"
+                                          id="competence"
+                                          rows="4"
+                                          class="formbold-form-input"
+                                        ></textarea>
                                     </div>
                                 </div>
 
                                 <div class="formbold-form-confirm">
-                                    <div class="formbold-form-file-flex">
-                                        <label for="upload" class="formbold-form-label">
-                                            Upload your Certificates :
+                                    <div>
+                                        <label for="message" class="form-sample-label">
+                                        Certificates :
                                         </label>
-                                        <input type="file" name="certificates" id="certificates" class="formbold-form-file"/>
+                                        <textarea
+                                          name="certificates"
+                                          id="certificates"
+                                          rows="4"
+                                          class="formbold-form-input"
+                                        ></textarea>
                                     </div>
                                 </div>
 
