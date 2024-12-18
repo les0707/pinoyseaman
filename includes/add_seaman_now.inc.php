@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $non_seagoing_work = trim($_POST["non_seagoing_work"]);
     $educ_training = trim($_POST["educ_training"]);
     $merits = trim($_POST["merits"]);
+    $competence = trim($_POST["competence"]);
+    $certificates = trim($_POST["certificates"]);
     $currentDate = date("Y-m-d");
 
     // Normalize names
@@ -97,14 +99,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // If no duplicate, proceed with the INSERT
         $query = "INSERT INTO job_seeker (prefer_job, first_name, middle_name, last_name, birthday, gender, email, cellphone, city, passport_country, passport_no, passport_issued, 
                 passport_valid, sbook_country, sbook_no, sbook_issued, sbook_valid, seagoing_work, non_seagoing_work, educ_training,
-                merits, id, password, date, view, verification)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                merits, id, password, date, view, verification, competence, certificates)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         $stmt = $pdo->prepare($query);
 
         $stmt->execute([$prefer_job, $first_name, $middle_name, $last_name, $date, $sex, $email, $cellphone, $city, $passport_country, $passport_no, $passport_issued,
                         $passport_valid, $sbook_country, $sbook_no, $sbook_issued, $sbook_valid, $seagoing_work, $non_seagoing_work, $educ_training,
-                        $merits, $newid, $newpassword, $currentDate, 'y', 'y']);
+                        $merits, $newid, $newpassword, $currentDate, 'y', 'y', $competence, $certificates]);
 
         $pdo = null;
         $stmt = null;

@@ -1,5 +1,6 @@
 <?php
-include 'connect.php';
+// include 'connect.php';
+include 'includes/dbh.inc.php';
 include 'includes/header.php';
 include 'includes/nav.php';
 
@@ -38,7 +39,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <div class="seaman-registration-form"> 
                     <h2>Register as Seaman</h2>
                         <hr>
-                        <form action="add_seaman_now.php" method="post" name="register_seaman" id="register_seaman">
+                        <form name="register_seaman" id="register_seaman">
                             <div class="formbold-steps">
                                 <ul>
                                     <li class="formbold-step-menu1 active">
@@ -245,20 +246,30 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
 
                                 <div class="formbold-form-confirm">
-                                    <div class="formbold-form-file-flex">
-                                        <label for="upload" class="formbold-form-label">
-                                            Upload your License, Competency, U.S. Visa, Schengen Visa:
+                                    <div>
+                                        <label for="message" class="form-sample-label">
+                                        License, Competency, U.S. Visa, Schengen Visa :
                                         </label>
-                                        <input type="file" name="competence" id="competence" class="formbold-form-file"/>
+                                        <textarea
+                                          name="competence"
+                                          id="competence"
+                                          rows="4"
+                                          class="formbold-form-input"
+                                        ></textarea>
                                     </div>
                                 </div>
 
                                 <div class="formbold-form-confirm">
-                                    <div class="formbold-form-file-flex">
-                                        <label for="upload" class="formbold-form-label">
-                                            Upload your Certificates :
+                                    <div>
+                                        <label for="message" class="form-sample-label">
+                                        Certificates :
                                         </label>
-                                        <input type="file" name="certificates" id="certificates" class="formbold-form-file"/>
+                                        <textarea
+                                          name="certificates"
+                                          id="certificates"
+                                          rows="4"
+                                          class="formbold-form-input"
+                                        ></textarea>
                                     </div>
                                 </div>
 
