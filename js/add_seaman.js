@@ -1,3 +1,4 @@
+// change
 //This js is for add_seaman.php 3 way process. It contains code for next button, validation and others.
 document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.getElementById("next-button");
