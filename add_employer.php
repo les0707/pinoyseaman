@@ -84,22 +84,7 @@ include 'includes/nav.php';
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            Please answer the question:<span style="color: red;">*</span>
-                        </label>
-                        <?php
-                        $link = mysqli_connect($dbhost, $dbusername, $dbuserpassword, $dbname) or die("Error " . mysqli_error($link));
-                        $query = "SELECT * from sikreto order by rand() limit 1" or die("Error" . mysqli_error($link));
-                        $result = mysqli_query($link, $query);
-                        while ($row = mysqli_fetch_array($result)) {
-
-                            echo "<font color='black' size='4'><br>" . $row['question'] . "</font>";
-                            @$_SESSION["answerx"] = $row['code'];
-                        }
-                        ?>
-                        <span>=</span>
-                        <input name="answer" type="text" id="answer" value="<?php echo $answer; ?>" size="5" maxlength="5">
-                        <?php echo $answer_error; ?>
+                        
 
                         <div class="form-group terms">
                             <input type="checkbox" id="terms" name="terms">
@@ -113,14 +98,39 @@ include 'includes/nav.php';
                             </label>
                         </div>
 
-                        <button class="employer-register" id="Submit" name="Submit" type="Submit">Register Company Now </button>
+                    </div> 
 
+                    <!-- reCAPTCHA -->
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LcmCKAqAAAAAIemTEJHNXEzWPxh-h3oq_9YH12Y"></div>
+                        <?php echo $captcha_error ?? ''; ?>
                     </div>
+
+                    <button class="employer-register" id="Submit" name="Submit" type="Submit">Register Company Now </button>
+
                 </form>
             </div>
         </div>
         <?php include 'includes/aside.php' ?>
     </div>
 </body>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="js/validation.js"></script>
 <?php include 'includes/footer.php' ?>
+
+<?php
+// Server-side CAPTCHA verification
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $secretKey = '6LcmCKAqAAAAAMCPO7v2c-0nooBV_hbvBPjHHAKv';
+    $responseKey = $_POST['g-recaptcha-response'];
+    $userIP = $_SERVER['REMOTE_ADDR'];
+    $verifyURL = "https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$responseKey}&remoteip={$userIP}";
+
+    $response = file_get_contents($verifyURL);
+    $responseKeys = json_decode($response, true);
+
+    if (!$responseKeys['success']) {
+        $captcha_error = "Please complete the CAPTCHA to proceed.";
+    }
+}
+?>
