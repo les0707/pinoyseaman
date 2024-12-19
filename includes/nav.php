@@ -2,6 +2,11 @@
 <nav>
     <a href="index.php"><img src="images/logo.png" alt="" class="logo"></a>
 
+    <!-- Burger Menu Icon -->
+    <button id="menu-toggle" class="burger">
+        &#9776; <!-- Unicode for a hamburger icon -->
+    </button>
+
     <ul>
         <li><a href="index.php">Home</a> |</li>
         <li><a href="job_search.php">Job Search</a> |</li>
@@ -12,6 +17,7 @@
         <li><a href="contact.php">Contact Us</a> </li>
     </ul>
 </nav>
+
 
 <div class="banner-container">
 
