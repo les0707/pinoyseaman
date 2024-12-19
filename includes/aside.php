@@ -41,8 +41,7 @@
     </form>
 
     <div class="database">
-    <!--container database record-->
-    <div class="category">
+      <div class="category">
         <strong>Database Records</strong>
         <?php
             include 'dbh.inc.php'; // Include your database connection file
@@ -55,7 +54,7 @@
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($row) {
                     ?>
-                    <div class="data-record">
+                    <div id="employer-data">
                         <strong><a href="seaman_list.php">Registered Seaman :</a> </strong> <span><?php echo $row["seaman"]; ?></span>
                         <strong><a href="company_list.php">Registered Company: </a> </strong> <span><?php echo $row["employer"]; ?></span><br>
                         <strong><a href="job_search.php">Job Posted: </a></strong> <span><?php echo $row["jobs"]; ?></span>
@@ -68,12 +67,10 @@
                 echo "Error executing query: " . $pdo->errorInfo();
             }
         ?>
+      </div>
     </div>
-</div>
-
 
     <div class="database">
-        <!--container new seaman member -->
         <div class="category">
             <strong>Newest Seaman member</strong>
             <?php
@@ -100,11 +97,11 @@
 
             ?>
         </div>
-        <div class="data-record">
-            <strong class="record-style">Name: </strong> <span><?php echo $name; ?></span><br>
-            <strong class="record-style">Position: </strong> <span><?php echo $position; ?></span><br>
-            <strong class="record-style">Date Registered: </strong> <span><?php echo $date_registered; ?></span>
-        </div>
+            <div class="data-record">
+                <strong class="record-style">Name: </strong> <span><?php echo $name; ?></span><br>
+                <strong class="record-style">Position: </strong> <span><?php echo $position; ?></span><br>
+                <strong class="record-style">Date Registered: </strong> <span><?php echo $date_registered; ?></span>
+            </div>
     </div>
 
 
