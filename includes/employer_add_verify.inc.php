@@ -96,15 +96,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $currentDate, 'FREE', '50', 'companylogo.gif', $datenow, $rnd_id, $password1]);
 
         $pdo = null;
-        $stmt = null;        
+        $stmt = null; 
+        
+        // Send emails using PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            // SMTP Configuration
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'esclanda97@gmail.com'; // Your Gmail email
+            $mail->Password = 'vfqm lavl njrx hiqr';   // Gmail App Password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
 
-        // Show alert and redirect using JavaScript
-        echo '<script>
-            alert("Registration successful!");
-            window.location.href = "../index.php";
-        </script>';
-        exit;
+            // Sender (No-reply email)
+            $mail->setFrom('no-reply@pinoyseaman.com', 'PinoySeaman');
+            $mail->addReplyTo('no-reply@pinoyseaman.com', 'PinoySeaman');
 
+            // Send email to user
+            // $mail->setFrom('esclanda97@gmail.com', 'PinoySeaman');
+            $mail->addAddress($email, $contact);
+            $mail->isHTML(true);
+            $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
+            $mail->Body = "
+                <p>Hello $contact,</p>
+                <p>Congratulations!, your account has been created successfully.</p>
+                
+                <p>Thank you for joining us!</p>";
+
+            $mail->send();
+
+            // Send email to admin
+            $mail->clearAddresses(); // Clear recipient list
+            $mail->addAddress('esclanda97@gmail.com'); // Admin email
+            $mail->Subject = "From: PinoySeaman <infopinoyseaman.com>";
+            $mail->Body = "
+                <p>New employer registration:</p>
+                <p><strong>Company Name:</strong> $company_name</p>
+                <p><strong>Employer ID:</strong> $newid</p>
+                <p><strong>Employer Address:</strong> $company_address</p>
+                <p><strong>Phone Number:</strong> $phone</p>
+                <p><strong>Fax Number:</strong> Wala Pa</p>
+                <p><strong>Contact Person:</strong> $contact</p>
+                <p><strong>Primary Email:</strong> $email</p>
+                <p><strong>Additional Email:</strong> $email2</p>
+                <p><strong>Additional Email:</strong> $email3</p>
+                <p><strong>Website:</strong> $website</p>
+                <p><strong>Company Profile:</strong> $company_profile</p>
+                <p><strong>Password:</strong> $password1</p>
+                <p><strong>Password2:</strong> $newpassword</p>
+                <p><strong>Random ID:</strong> $rnd_id</p>";
+
+            $mail->send();
+
+            // Show alert and redirect using JavaScript
+            echo '<script>
+                alert("Registration successful!");
+                window.location.href = "../index.php";
+            </script>';
+            exit;
+
+        } catch (Exception $e) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Email error: {$mail->ErrorInfo}"
+            ]);
+            exit;
+        }
+
+       
     } catch (PDOException $e) {
         // Handle query errors
         echo '<script>
