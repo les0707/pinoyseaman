@@ -20,12 +20,6 @@ nav{
 
 }
 
-nav ul {
-    display: flex; /* Align items horizontally by default */
-    margin: 0;
-    padding: 0;
-}
-
 nav ul li{
     list-style: none;
     display: inline-block;
@@ -37,25 +31,11 @@ nav li {
     color: #fff;
 }
 
-nav .logo {
+nav .logo{
     cursor: pointer;
-    overflow: hidden;
+    overflow: hidden;  
 }
 
-nav .burger {
-    display: none; /* Hidden by default */
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #fff;
-    cursor: pointer;
-    margin-right: 20px;
-    z-index: 20; /* Ensure it appears above other elements */
-}
-
-.hidden {
-    display: none;
-}
 
 /*----------top banner styling------------*/
 .banner-container {
@@ -454,7 +434,7 @@ input:focus, textarea:focus {
 }
 
 .data-record {
-    margin-top: 10px;
+    margin-top: 4px;
     margin-left: 5px;
 }
 
@@ -1133,34 +1113,19 @@ h3{
 
 @media (max-width: 768px) {
     nav {
-        justify-content: space-between;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        padding: 10px;
     }
 
     nav ul {
-        flex-direction: column;
-        position: absolute;
-        top: 60px; /* Adjust based on your nav height */
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-        width: 100%;
-        padding: 10px 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        display: none; /* Hidden initially */
-    }
-
-    nav ul.show {
-        display: flex; /* Display menu when toggled */
+        flex-wrap: wrap; 
+        justify-content: center; 
     }
 
     nav ul li {
-        text-align: center;
-        padding: 10px 0;
+        margin: 5px 10px; 
     }
-
-    nav .burger {
-        display: block; /* Show burger icon */
-    }
-
 
     /*------------banner container------------*/
 
@@ -1374,10 +1339,14 @@ h3{
     /*------------banner container------------*/
 
 
-    .first-banner, .second-banner {
-        padding: 3px;
+    .first-banner{
+        padding: 5px;
         width: 100%; 
-        font-size: 24pt; 
+    }
+    
+    .second-banner{
+        padding: 5px;
+        width: 100%; 
     }
 
     /*-----------company content-----------*/
