@@ -122,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Body = "
                 <p>Hello $contact,</p>
                 <p>Congratulations!, your account has been created successfully.</p>
+                <p>However, registration requires account activation by PinoySeaman admin.  We will verify your account via phone call / email and  we will notify you once your account is activated.</p>
                 
                 <p>Thank you for joining us!</p>";
 
