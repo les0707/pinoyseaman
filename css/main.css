@@ -438,6 +438,11 @@ input:focus, textarea:focus {
     margin-left: 5px;
 }
 
+#employer-data{
+    margin-left: 5px;
+    margin-top: 8px;
+}
+
 .record-style{
     color: #000000; 
     font-size:13px;
@@ -1258,11 +1263,10 @@ h3{
         font-size: 16px; 
     }
 
-    .add-seaman-banner img{
+    .add-seaman-banner{
         width: 100%; 
-        height: auto;
         margin-left: 7px;
-        padding-right: 31px;
+        margin-right: 7px;
     }
 
     .seaman-registration-form{
@@ -1469,11 +1473,10 @@ h3{
         font-size: 14px; /* Smaller font size for links */
     }
 
-    .add-seaman-banner {
+    .add-seaman-banner{
         width: 100%; 
-        max-width: 100%; 
         margin-left: 7px;
-        padding-right: 18px;
+        margin-right: 7px;
     }
 
     .seaman-registration-form{
