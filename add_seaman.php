@@ -1,4 +1,5 @@
 <?php
+// changed
 // include 'connect.php';
 include 'includes/dbh.inc.php';
 include 'includes/header.php';
