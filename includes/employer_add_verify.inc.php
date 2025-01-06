@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $website = trim($_POST["website"]);
     $password1 = trim($_POST["password1"]);
     $currentDate = date("Y-m-d");
+    $datenow = date("Y-m-d");
     $newpassword = md5($password1); // Hash password with md5
 
     // Function to generate ID
@@ -40,10 +41,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         return $pwd;
+
     }
 
     // Generate new ID 
     $newid = generateID(8);
+
+    function generateRNDID($plength)
+    {
+        // Characters to choose from: uppercase, lowercase, and digits
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        mt_srand(microtime(true) * 1000000); // Randomize seed
+        $pwd = '';
+
+        // Generate random ID
+        for ($i = 0; $i < $plength; $i++) {
+            $key = mt_rand(0, strlen($chars) - 1);
+            $pwd .= $chars[$key];
+        }
+
+        return $pwd;
+    }
+
+    $rnd_id = generateRNDID(8);
+
 
     try {
         require_once "dbh.inc.php";
@@ -65,12 +86,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // If no duplicate, proceed with the INSERT
-        $query = "INSERT INTO employer (company, company_profile, address, phone, email, email2, contact, website, password, id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO employer (company, company_profile, address, phone, email, email2, contact, website, password, id,
+                date_registered, member_type, total_post, logo, date, company_code, secret)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DATE_ADD(?, INTERVAL 7 DAY), ?, ?);";
 
         $stmt = $pdo->prepare($query);
 
-        $stmt->execute([$company_name, $company_profile, $company_address, $phone, $email, $email2, $contact, $website, $newpassword, $newid]);
+        $stmt->execute([$company_name, $company_profile, $company_address, $phone, $email, $email2, $contact, $website, $newpassword, $newid,
+                $currentDate, 'FREE', '50', 'companylogo.gif', $datenow, $rnd_id, $password1]);
 
         $pdo = null;
         $stmt = null;        
