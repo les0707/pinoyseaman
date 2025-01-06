@@ -96,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const nonSeagoingWork = document.getElementById("non_seagoing_work").value.trim();
         const educTraining = document.getElementById("educ_training").value.trim();
         const merits = document.getElementById("merits").value.trim();
-        const competence = document.getElementById("competence").files.length;
-        const certificates = document.getElementById("certificates").files.length;
+        const competence = document.getElementById("competence").value.trim();
+        const certificates = document.getElementById("certificates").value.trim();
         const termsChecked = document.getElementById("view").checked && document.getElementById("ab").checked;
   
         if (!seagoingWork || !nonSeagoingWork || !educTraining || !merits || competence === 0 || certificates === 0) {
