@@ -20,14 +20,14 @@ include 'includes/nav.php';
             <div class="employer-list-content">
                 <h2>Company Information</h2>
                 <p><span style="color: red;">*</span> Indicates required fields.</p>
-                <form action="employer_add_verify.php" name="add_employer" method="post">
+                <form action="includes/employer_add_verify.inc.php" name="add_employer" method="post">
                     <div class="form-group">
                         <?php
                         $company_name = @str_replace("^", "'", $company_name);
                         $company_name = @str_replace("*", "&", $company_name);
                         ?>
                         <label class="add-label">Company Name <span style="color: red;">*</span></label>
-                        <input class="group-input" name="company_name" type="text" id="company_name3" value="<?php echo $company_name; ?>" placeholder="Pinoy Seaman">
+                        <input class="group-input" name="company_name" type="text" id="company_name" value="<?php echo $company_name; ?>" placeholder="Pinoy Seaman">
                         <?php echo $company_name_error; ?>
                     </div>
 
@@ -37,13 +37,13 @@ include 'includes/nav.php';
                         $company_profile = @str_replace("*", "&", $company_profile);
                         ?>
                         <label class="add-label">Company Description<span style="color: red;">*</span></label>
-                        <textarea name="company_profile" id="textarea6"><?php echo $company_profile; ?></textarea>
+                        <textarea name="company_profile" id="company_profile"><?php echo $company_profile; ?></textarea>
                         <?php echo $company_profile_error; ?>
                     </div>
 
                     <div class="form-group">
                         <label class="add-label">Address<span style="color: red;">*</span></label>
-                        <textarea name="company_address" id="textarea5"><?php echo $company_address; ?></textarea>
+                        <textarea name="company_address" id="company_address"><?php echo $company_address; ?></textarea>
                         <?php echo $company_address_error; ?>
                     </div>
 
@@ -62,44 +62,29 @@ include 'includes/nav.php';
 
                     <div class="form-group">
                         <label for="email" class="add-label">Additional Email</label>
-                        <input class="group-input" type="text" name="email2" value="<?php echo $email2; ?>" placeholder="secondary@gmail.com">
+                        <input class="group-input" type="text" name="email2" id="email2" value="<?php echo $email2; ?>" placeholder="secondary@gmail.com">
                         <?php echo $company_email2_error; ?>
                     </div>
 
                     <div class="form-group">
                         <label for="contact" class="add-label">Contact Person<span style="color: red;">*</span></label>
-                        <input class="group-input" type="text" name="contact" id="contact3" value="<?php echo $contact; ?>" placeholder="Juan Dela Cruz">
+                        <input class="group-input" type="text" name="contact" id="contact" value="<?php echo $contact; ?>" placeholder="Juan Dela Cruz">
                         <?php echo $company_contact_error; ?>
                     </div>
 
                     <div class="form-group">
                         <label class="add-label">Website URL (If Applicable)</label>
-                        <input class="group-input" type="url" name="website" value="<?php echo $website; ?>" placeholder="pinoyseaman.com">
+                        <input class="group-input" type="text" name="website" id="website" value="<?php echo $website; ?>" placeholder="pinoyseaman.com">
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="add-label">Login Password<span style="color: red;">*</span></label>
-                        <input class="group-input" type="password" name="password1" value="<?php echo $password1; ?>">
+                        <input class="group-input" type="password" name="password1" id="password1" value="<?php echo $password1; ?>">
                         <?php echo $company_password1_error; ?>
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            Please answer the question:<span style="color: red;">*</span>
-                        </label>
-                        <?php
-                        $link = mysqli_connect($dbhost, $dbusername, $dbuserpassword, $dbname) or die("Error " . mysqli_error($link));
-                        $query = "SELECT * from sikreto order by rand() limit 1" or die("Error" . mysqli_error($link));
-                        $result = mysqli_query($link, $query);
-                        while ($row = mysqli_fetch_array($result)) {
-
-                            echo "<font color='black' size='4'><br>" . $row['question'] . "</font>";
-                            @$_SESSION["answerx"] = $row['code'];
-                        }
-                        ?>
-                        <span>=</span>
-                        <input name="answer" type="text" id="answer" value="<?php echo $answer; ?>" size="5" maxlength="5">
-                        <?php echo $answer_error; ?>
+                        
 
                         <div class="form-group terms">
                             <input type="checkbox" id="terms" name="terms">
@@ -113,14 +98,39 @@ include 'includes/nav.php';
                             </label>
                         </div>
 
-                        <button class="employer-register" id="Submit" name="Submit" type="Submit">Register Company Now </button>
+                        
 
+                    <!-- reCAPTCHA -->
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LcmCKAqAAAAAIemTEJHNXEzWPxh-h3oq_9YH12Y"></div>
+                        <?php echo $captcha_error ?? ''; ?>
                     </div>
+
+                    <button class="employer-register" id="Submit" name="Submit" type="Submit">Register Company Now </button>
+
                 </form>
             </div>
         </div>
         <?php include 'includes/aside.php' ?>
     </div>
 </body>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="js/validation.js"></script>
 <?php include 'includes/footer.php' ?>
+
+<?php
+// Server-side CAPTCHA verification
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $secretKey = '6LcmCKAqAAAAAMCPO7v2c-0nooBV_hbvBPjHHAKv';
+    $responseKey = $_POST['g-recaptcha-response'];
+    $userIP = $_SERVER['REMOTE_ADDR'];
+    $verifyURL = "https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$responseKey}&remoteip={$userIP}";
+
+    $response = file_get_contents($verifyURL);
+    $responseKeys = json_decode($response, true);
+
+    if (!$responseKeys['success']) {
+        $captcha_error = "Please complete the CAPTCHA to proceed.";
+    }
+}
+?>
