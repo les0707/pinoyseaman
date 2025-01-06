@@ -75,21 +75,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdo = null;
         $stmt = null;        
 
+        // Show alert and redirect using JavaScript
+        echo '<script>
+            alert("Registration successful!");
+            window.location.href = "../index.php";
+        </script>';
+        exit;
+
     } catch (PDOException $e) {
         // Handle query errors
-        echo json_encode([
-            "success" => false,
-            "message" => "Database error: " . $e->getMessage()
-        ]);
+        echo '<script>
+            alert("Database error: ' . $e->getMessage() . '");
+        </script>';
         exit;
     }
 
 } else {
     // Handle invalid request method
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid request method."
-    ]);
+    echo '<script>
+        alert("Invalid request method.");
+        window.location.href = "../index.php";
+    </script>';
     exit;
 }
 ?>

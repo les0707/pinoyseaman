@@ -98,7 +98,7 @@ include 'includes/nav.php';
                             </label>
                         </div>
 
-                        <button class="employer-register" id="Submit" name="Submit" type="Submit">Register Company Now </button>
+                        
 
                     <!-- reCAPTCHA -->
                     <div class="form-group">
