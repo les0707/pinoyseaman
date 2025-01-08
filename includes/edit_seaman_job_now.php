@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "./connect.php";
+include "dbh.inc.php";
 
 $linksql = mysqli_connect($dbhost, $dbusername, $dbuserpassword, $dbname) or die("Error " . mysqli_error($linksql));
 
