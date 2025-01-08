@@ -21,7 +21,7 @@ include 'includes/nav.php';
                     <div class="formbold-input-flex">
                         <div>
                             <label for="lastname" class="formbold-form-label"> Email </label>
-                            <input type="email" name="email" id="email"class="formbold-form-input" placeholder="Your employer email"/>
+                            <input type="email" name="company_email" id="company_email"class="formbold-form-input" placeholder="Your employer email"/>
                         </div>
                     </div>
                         <div class="btn-form">
