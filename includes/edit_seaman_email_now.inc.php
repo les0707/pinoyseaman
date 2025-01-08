@@ -36,13 +36,15 @@ if (mysqli_num_rows($result) == 1) {
         mysqli_free_result($result);
         exit;
     } else {
-        echo "<script>alert('Error updating email address: " . mysqli_error($link) . "'); 
+        echo "<script>alert('Error updating email address: " . mysqli_error($linksql) . "'); 
         window.location.href='edit_seaman_email.php';</script>";
     }
 } else {
     echo "<script>alert('Invalid password.'); 
     window.location.href='edit_seaman_email.php';</script>";
 }
+
+mysqli_close($linksql);
 
 ?>
 
