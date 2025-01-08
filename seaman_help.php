@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include 'includes/dbh.inc.php';
 include 'includes/header.php';
 include 'includes/nav.php';
 ?>
@@ -15,21 +15,21 @@ include 'includes/nav.php';
 
         <div class="seaman-registration-form"> 
         <!------------------------------ form --------------------------->
-            <form action="seaman_login_verify2.php" method="post"  name="seaman1" id="seaman1" onsubmit="return validateForm_seaman_login()">
+            <form action="job_seeker_login_forgot_verify.php" method="post"  name="seaman1" id="seaman1" onsubmit="return validateForm_seaman_login()">
                 <div class="formbold-form-step-1 active">
                     <h3>Forgot your Pinoyseaman.com password?</h3>
                     <hr>
                     <div class="formbold-input-flex">
                         <div>
-                            <label for="lastname" class="formbold-form-label"> Email: </label>
-                            <input name="job_seeker_id" type="text" id="job_seeker_id" class="formbold-form-input" placeholder="Enter your email"/>
+                            <label for="seeker_email" class="formbold-form-label"> Email: </label>
+                            <input name="seeker_email" type="text" id="seeker_email" class="formbold-form-input" placeholder="Enter your email"/>
                             <p>this is the email address you used to register your PinoySeaman.com account</p>
                         </div>
                         
 
                     </div>
                         <div class="btn-form">
-                            <input class="contact-submit" type="submit" name="button2" id="button2" value="Retrieve">
+                            <input class="contact-submit" type="submit" name="submit" id="button2" value="retrieve password">
                         </div>
                     <br>
                     <hr>
