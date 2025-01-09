@@ -31,7 +31,7 @@ if (mysqli_num_rows($result) == 1) {
         $_SESSION["seeker_id"] = $new_email;
         $message = "<font color=blue>Email address updated successfully.</font>";
         $link = "seaman_panel.php"; 
-        include "./action.php";
+        include "../action.php";
         mysqli_close($link);
         mysqli_free_result($result);
         exit;
