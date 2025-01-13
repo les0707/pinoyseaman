@@ -60,7 +60,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <!------------------------------ STEP ONE --------------------------->
                             <div class="formbold-form-step-1 active">
 
-                            <div class="custom-select">
+                            <div>
                                 <select name="prefer_job" id="prefer_job" class="formbold-form-input">
                                     <option value="">Select your desired Job Position: </option>
                                     <?php foreach ($jobs as $job): ?>
