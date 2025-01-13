@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "./connect.php";
+include "dbh.inc.php";
 
 if (!isset($_SESSION["seeker_id"]) || !isset($_SESSION["seeker_pass"])) {
     header("location: seaman_login.php");
@@ -71,8 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($linksql, $update_query)) {
         $message = "<font color=blue>Profile updated successfully.</font>";
-        $link = "seaman_panel.php"; 
-        include "./action.php";
+        $link = "../seaman_panel.php"; 
+        include "../action.php";
         mysqli_close($link);
         mysqli_free_result($result);
         exit;

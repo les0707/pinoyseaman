@@ -22,8 +22,8 @@ $row = mysqli_fetch_assoc($result);
 
 if ($row['password'] != $encrypted_password) {
     $message = "<font color=red>Current password is incorrect.</font>";
-    $link = "edit_seaman_job.php";
-    include "./action.php";
+    $link = "../edit_seaman_job.php";
+    include "../action.php";
     mysqli_free_result($result);
     mysqli_close($linksql);
     exit;
@@ -33,13 +33,13 @@ $update_query = "UPDATE job_seeker SET prefer_job='$new_job_position' WHERE emai
 
 if (mysqli_query($linksql, $update_query)) {
     $message = "<font color=blue>Job position updated successfully.</font>";
-    $link = "seaman_profile.php";
+    $link = "../seaman_profile.php";
 } else {
     $message = "Error updating job position: " . mysqli_error($linksql);
-    $link = "edit_seaman_job.php";
+    $link = "../edit_seaman_job.php";
 }
 
 mysqli_free_result($result);
 mysqli_close($linksql);
-include "./action.php";
+include "../action.php";
 ?>

@@ -19,8 +19,8 @@ $encrypted_old_password = md5($old_password);
 
 if ($new_password != $new_password2) {
     $message = "<font color=red>New passwords do not match.</font>";
-    $link = "edit_seaman_password.php";
-    include "./action.php";
+    $link = "../edit_seaman_password.php";
+    include "../action.php";
     exit;
 }
 
@@ -30,8 +30,8 @@ $row = mysqli_fetch_assoc($result);
 
 if ($row['password'] != $encrypted_old_password) {
     $message = "<font color=red>Current password is incorrect.</font>";
-    $link = "edit_seaman_password.php";
-    include "./action.php";
+    $link = "../edit_seaman_password.php";
+    include "../action.php";
     mysqli_free_result($result);
     mysqli_close($linksql);
     exit;
@@ -43,13 +43,13 @@ $update_query = "UPDATE job_seeker SET id ='$new_password', password='$encrypted
 if (mysqli_query($linksql, $update_query)) {
     $_SESSION["seeker_pass"] = $encrypted_new_password;
     $message = "<font color=blue>Password updated successfully.</font>";
-    $link = "seaman_profile.php"; // Redirect to profile page
+    $link = "../seaman_profile.php"; // Redirect to profile page
 } else {
     $message = "Error updating password: " . mysqli_error($linksql);
-    $link = "edit_seaman_password.php";
+    $link = "../edit_seaman_password.php";
 }
 
 mysqli_free_result($result);
 mysqli_close($linksql);
-include "./action.php";
+include "../action.php";
 ?>

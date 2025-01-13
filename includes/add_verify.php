@@ -40,16 +40,16 @@ if (empty($job_password)) {
 }
 
 if (!empty($errors)) {
-  include "./add_job.php";
+  include "../add_job.php";
   exit;
 }
 
 $job_password = md5($job_password);
 
 if ($job_password !== $employer_password) {
-  $link = "add_job.php";
+  $link = "../add_job.php";
   $message = "<font color='red'>Failed!, incorrect Employer Password!</font>";
-  include "./action.php";
+  include "../action.php";
   exit;
 }
 
@@ -76,14 +76,14 @@ if (mysqli_num_rows($result) == 0) {
   $query = "INSERT INTO action (company, date, action, ip, time) VALUES ('$company_code', '$today', 'Job Posted - $job_title', '$ip', '$timenow')";
   mysqli_query($link, $query) or die("Error " . mysqli_error($link));
 
-  $link = "employer_panel.php";
+  $link = "../employer_panel.php";
   $message = "<font color='blue'>Your job ($job_title) has been posted...</font>";
-  include "./action.php";
+  include "../action.php";
   exit;
 } else {
-  $link = "employer_panel.php";
+  $link = "../employer_panel.php";
   $message = "<font color='red'>error!, $job_title already posted!</font>";
-  include "./action.php";
+  include "../action.php";
   exit;
 }
 ?>
