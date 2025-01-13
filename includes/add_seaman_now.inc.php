@@ -80,19 +80,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         require_once "dbh.inc.php";
 
-        // Check for duplicate entries
-        $checkQuery = "SELECT COUNT(*) FROM job_seeker WHERE first_name = ? AND middle_name = ? AND last_name = ? AND cellphone = ?";
+        // Check for duplicate entries by email
+        $checkQuery = "SELECT COUNT(*) FROM job_seeker WHERE email = ?";
         $checkStmt = $pdo->prepare($checkQuery);
-        $checkStmt->execute([$first_name, $middle_name, $last_name, $cellphone]);
+        $checkStmt->execute([$email]);
 
         $recordExists = $checkStmt->fetchColumn();
 
         if ($recordExists > 0) {
             // Duplicate record found
-            echo json_encode([
-                "success" => false,
-                "message" => "Duplicate entry detected: You have already submitted this form."
-            ]);
+            $link = "../add_seaman.php";
+            $message = "<font color='red'>Duplicate entry detected: This email is already registered.</font>";
+            include "../action.php";
             exit;
         }
 
@@ -155,35 +154,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->send();
 
             // Return success response
-            echo json_encode([
-                "success" => true,
-                "message" => "Form submitted successfully and emails have been sent."
-            ]);
+            $link = "../add_seaman.php";
+            $message = "<font color='green'>Form submitted successfully and emails have been sent.</font>";
+            include "../action.php";
             exit;
 
         } catch (Exception $e) {
-            echo json_encode([
-                "success" => false,
-                "message" => "Email error: {$mail->ErrorInfo}"
-            ]);
+            $link = "../add_seaman.php";
+            $message = "<font color='red'>Email error: {$mail->ErrorInfo}</font>";
+            include "../action.php";
             exit;
         }
 
     } catch (PDOException $e) {
         // Handle query errors
-        echo json_encode([
-            "success" => false,
-            "message" => "Database error: " . $e->getMessage()
-        ]);
+        $link = "../add_seaman.php";
+        $message = "<font color='red'>Database error: " . $e->getMessage() . "</font>";
+        include "../action.php";
         exit;
     }
 
 } else {
     // Handle invalid request method
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid request method."
-    ]);
+    $link = "../add_seaman.php";
+    $message = "<font color='red'>Invalid request method.</font>";
+    include "../action.php";
     exit;
 }
 ?>

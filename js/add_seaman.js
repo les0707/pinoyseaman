@@ -1,4 +1,4 @@
-//This js is for add_seaman.php 3 way process. It contains code for next button, validation and others.
+// This js is for add_seaman.php 3 way process. It contains code for next button, validation and others.
 document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.getElementById("next-button");
     const backButton = document.querySelector(".formbold-back-btn");
@@ -6,25 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const stepMenuItems = document.querySelectorAll(".formbold-step-menu1, .formbold-step-menu2, .formbold-step-menu3"); // Selecting step menu items
     const submitButton = document.getElementById("submit-button"); // Submit button
     let currentStep = 0;
-  
+
     // Step navigation function
     function showStep(stepIndex) {
         steps.forEach((step, index) => {
             step.classList.toggle("active", index === stepIndex); // Show active step
         });
-  
+
         // Update step menu highlighting
         stepMenuItems.forEach((item, index) => {
             item.classList.toggle("active", index === stepIndex); // Highlight the active step in the menu
         });
-  
+
         // Show or hide the "Back" button
         if (currentStep > 0) {
-            backButton.style.display = "inline-block"; // Show the Back button on Step 2 and 3~
+            backButton.style.display = "inline-block"; // Show the Back button on Step 2 and 3
         } else {
             backButton.style.display = "none"; // Hide the Back button on Step 1
         }
-  
+
         // Hide the Next button on Step 3 and show the Submit button
         if (currentStep === 2) {
             nextButton.style.display = "none"; // Hide Next button on Step 3
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             submitButton.style.display = "none"; // Hide Submit button on Step 1 and 2
         }
     }
-  
+
     // Step 1 Validation
     function validateStep1() {
         const firstName = document.getElementById("first_name").value.trim();
@@ -46,31 +46,31 @@ document.addEventListener("DOMContentLoaded", function () {
         const cellphone = document.getElementById("cellphone").value.trim();
         const city = document.getElementById("city").value.trim();
         const email2 = document.getElementById("email2").value.trim();
-  
+
         // Clear previous error messages
         document.getElementById("dob-error").style.display = "none";
-  
+
         // Check if all required fields are filled
         if (!firstName || !middleName || !lastName || !dob || !sex || !email || !cellphone || !city || !email2) {
             alert("Please fill out all the fields in Step 1.");
             return false;
         }
-  
+
         // Validate DOB (check if year is 4 digits)
         if (dob.length !== 10 || !/^\d{4}-\d{2}-\d{2}$/.test(dob)) {
             document.getElementById("dob-error").style.display = "block";
             return false;
         }
-  
+
         // Check if email addresses match
         if (email !== email2) {
             alert("The emails do not match.");
             return false;
         }
-  
+
         return true;
     }
-  
+
     // Step 2 Validation (Passport & Seaman's Book)
     function validateStep2() {
         const passportCountry = document.getElementById("passport_country").value.trim();
@@ -81,15 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const sbookNo = document.getElementById("sbook_no").value.trim();
         const sbookIssued = document.getElementById("sbook_issued").value.trim();
         const sbookValid = document.getElementById("sbook_valid").value.trim();
-  
+
         if (!passportCountry || !passportNo || !passportIssued || !passportValid || !sbookCountry || !sbookNo || !sbookIssued || !sbookValid) {
             alert("Please fill out all passport and seaman's book fields.");
             return false;
         }
-  
+
         return true;
     }
-  
+
     // Step 3 Validation (Work Experiences and File Uploads)
     function validateStep3() {
         const seagoingWork = document.getElementById("seagoing_work").value.trim();
@@ -99,50 +99,24 @@ document.addEventListener("DOMContentLoaded", function () {
         const competence = document.getElementById("competence").value.trim();
         const certificates = document.getElementById("certificates").value.trim();
         const termsChecked = document.getElementById("view").checked && document.getElementById("ab").checked;
-  
+
         if (!seagoingWork || !nonSeagoingWork || !educTraining || !merits || competence === 0 || certificates === 0) {
             alert("Please fill out all work experience and upload necessary files.");
             return false;
         }
-  
+
         if (!termsChecked) {
             alert("You must agree to the terms and conditions.");
             return false;
         }
-  
+
         return true;
     }
-  
-    // Submit form via AJAX
-    function submitForm() {
-        const formData = new FormData(document.getElementById("register_seaman")); // FormData for uploading files
-  
-        fetch('process_form.php', { // Change this to the PHP script that handles form submission
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json()) // Expecting JSON response
-        .then(data => {
 
-            // Hide loader after receiving response
-            loader.style.display = "none";
-
-            if (data.success) {
-                alert("Registration successful! \nPlease check your email (also Spam folder) for your auto-generated password.");
-                window.location.href = 'index.php';
-            } else {
-                alert("Error: " + data.message);
-            }
-        })
-        .catch(error => {
-            alert("Error submitting form: " + error);
-        });
-    }
-  
     // Next Button Event
     nextButton.addEventListener("click", function (event) {
         event.preventDefault(); // Prevent default form submission
-  
+
         // Validate based on the current step
         if (currentStep === 0) {
             if (validateStep1()) {
@@ -156,17 +130,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-  
+
     // Submit Button Event (Step 3)
     submitButton.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default form submission
-  
         // Validate Step 3 before submitting
-        if (validateStep3()) {
-            submitForm(); // Submit form via AJAX
+        if (!validateStep3()) {
+            event.preventDefault(); // Prevent default form submission if validation fails
         }
     });
-  
+
     // Back Button Event
     backButton.addEventListener("click", function (event) {
         event.preventDefault();
@@ -175,9 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showStep(currentStep); // Go back to the previous step
         }
     });
-  
+
     // Initial display
     showStep(currentStep);
-  });
-  
-  
+});
