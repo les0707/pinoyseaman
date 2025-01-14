@@ -1,0 +1,43 @@
+<?php
+include 'includes/dashboard-header.inc.php';
+include 'includes/sidenav.inc.php';
+?>
+<body>
+<main>
+    <h1 class="page-title">Change Password</h1>
+    <section class="container">
+            <div class="container-controller">
+              <div class="card mb-4">
+                  <div class="card-header">Change Password</div>
+                  <div class="card-body">
+                      <form action="#" method="post">
+                          <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1">Change password</label>
+                                <input class="form-control" name="password" type="password" placeholder="New password">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1">Confirm new password</label>
+                                <input class="form-control" name="password2" type="password" placeholder="Re-enter new password">
+                            </div>
+                          </div>
+    
+                          <div class="password-form-control">
+                              <label class="small mb-1">Current password</label>
+                              <input class="form-control" name="old_password" type="password" placeholder="Current password">
+                          </div>
+
+                          <hr>
+                          <!-- Save changes button-->
+                          <button class="btn btn-primary" name="Submit" type="button">Change password</button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+      </section>
+  </main>
+  <?php include 'includes/body.inc.php';?>
+</body>
+</html>
