@@ -135,8 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Hello $first_name,</p>
                 <p>Welcome to PinoySeaman! Your account has been created successfully.</p>
                 <p>Your email: <strong>$email</strong></p>
-                <p>Your password: <strong>$newid</strong></p>
-                <p>Thank you for joining us!</p>";
+                <p>Your Auto Generated Password: <strong>$newid</strong></p>
+                <p>Please login to your account and update your password to something that you can easily remember.</p>";
 
             $mail->send();
 
@@ -146,10 +146,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
             $mail->Body = "
                 <p>A new seaman has registered on PinoySeaman:</p>
-                <p>Name: $first_name $middle_name $last_name</p>
-                <p>Email: $email</p>
-                <p>Cellphone: $cellphone</p>
-                <p>ID: $newid</p>";
+
+                <p>Preferred Job : $prefer_job</p>
+                <p>First Name : $first_name</p>
+                <p>Middle Name : $middle_name</p>
+                <p>Last Name: $last_name</p>
+                <p>Birthdate : $date</p>
+                <p>Gender : $sex</p>
+                <p>City : $city</p>
+                <p>Cellphone : $cellphone</p>
+                <p> </p>
+                <p>Email : $email</p>
+                <p>PinoySeaman ID : $newpassword</p>
+                <p>Password : $newid</p>
+                <p> </p>
+                <p>Seagoing Work : $seagoing_work</p>
+                <p> </p>
+                <p>Passport Country : $passport_country</p>
+                <p>Passport Number : $passport_no</p>
+                <p>Passport Issued : $passport_issued</p>
+                <p>Passport Valid : $passport_valid</p>
+                <p> </p>
+                <p>Seaman's Book Country : $sbook_country</p>
+                <p>Seaman's Book Number : $sbook_no</p>
+                <p>Seaman's Book Issued : $sbook_issued</p>
+                <p>Seaman's Book Valid : $sbook_valid</p>
+                <p> </p>
+                <p>Competence : $competence</p>
+                <p> </p>
+                <p>Certificates : $certificates</p>
+                <p> </p>
+                <p>Education and Training : $educ_training</p>
+                <p> </p>
+                <p>Non Seagoing Work : $non_seagoing_work</p>
+                <p> </p>
+                <p>Merits : $merits</p>";
 
             $mail->send();
 
