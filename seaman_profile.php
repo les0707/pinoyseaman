@@ -1,7 +1,25 @@
 <?php
+session_start();
+include "includes/dbh.inc.php";
+
+if(!isset($_SESSION["seeker_id"]))
+{
+header("location: seaman_login.php");
+exit;
+}
+if(!isset($_SESSION["seeker_pass"]))
+{
+header("location: seaman_login.php");
+exit;
+}
+$id = $_SESSION["seeker_id"];
+$pass = $_SESSION["seeker_pass"];
+
 include 'includes/dashboard-header.inc.php';
 include 'includes/sidenav.inc.php';
+
 ?>
+
 <body>
 <main>
     <h1 class="page-title">My Profile</h1>
@@ -13,7 +31,7 @@ include 'includes/sidenav.inc.php';
             <div class="d-flex flex-column align-items-center text-center">
               <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
               <div class="mt-3">
-                <h4 style="color: black;">Username</h4>
+                <h4 style="color: black;">Name</h4>
                 <p class="text-secondary mb-1">Job Position here</p>
                 <div class="col-sm-12">
                   <a class="btn btn-primary" href="edit_seaman_profile.php">Update job position</a>
