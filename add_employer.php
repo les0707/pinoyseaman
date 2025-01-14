@@ -111,8 +111,8 @@ include 'includes/nav.php';
                 </form>
             </div>
         </div>
-        <?php include 'includes/aside.php' ?>
     </div>
+    <?php include 'includes/aside.php' ?>
 </body>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="js/validation.js"></script>
