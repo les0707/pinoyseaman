@@ -1,74 +1,58 @@
 <?php
-session_start();
-include "./connect.php";
-
-if(!isset($_SESSION["seeker_id"]))
-{
-header("location: seaman_login.php");
-exit;
-}
-if(!isset($_SESSION["seeker_pass"]))
-{
-header("location: seaman_login.php");
-exit;
-}
-$id = $_SESSION["seeker_id"];
-$pass = $_SESSION["seeker_pass"];
-
 include 'includes/dashboard-header.inc.php';
 include 'includes/sidenav.inc.php';
 ?>
 <body>
 <main>
-    <h1 class="page-title">Available jobs</h1>
+    <h1 class="page-title">Applied History</h1>
     <section class="container">
       <!-- First Card -->
-      <div class="card" id="card">
-      <img src="images/wallem_logo.jpg" class="card-img-top" alt="yourads2">
+      <div class="card" style="width: 15rem;" id="card">
+        <img src="ads/yourads2.jpg" class="card-img-top" alt="yourads2">
         <div class="card-body-job">
           <h6 class="company-name">company name</h6>
           <h5 class="job-title">job type</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seaman-panel-modal">See more</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applied-history-modal">Info</button>
         </div>
       </div>
   
       <!-- Second Card -->
       <div class="card" style="width: 15rem;" id="card">
-      <img src="banner_rotate/marsa.jpg" class="card-img-top" alt="yourads2">
+      <img src="ads/yourads2.jpg" class="card-img-top" alt="yourads2">
         <div class="card-body-job">
           <h6 class="company-name">company name</h6>
           <h5 class="job-title">job type</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seaman-panel-modal">See more</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applied-history-modal">Info</button>
         </div>
       </div>
   
       <!-- Third Card -->
       <div class="card" style="width: 15rem;" id="card">
-      <img src="images/wallem_logo.jpg" class="card-img-top" alt="yourads2">
+        <img src="ads/yourads2.jpg" class="card-img-top" alt="yourads2">
         <div class="card-body-job">
           <h6 class="company-name">company name</h6>
           <h5 class="job-title">job type</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seaman-panel-modal">See more</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applied-history-modal">Info</button>
         </div>
       </div>
   
       <!-- Fourth Card -->
       <div class="card" style="width: 15rem;" id="card">
-      <img src="images/wallem_logo.jpg" class="card-img-top" alt="yourads2">
+      <img src="ads/yourads2.jpg" class="card-img-top" alt="yourads2">
         <div class="card-body-job">
           <h6 class="company-name">company name</h6>
           <h5 class="job-title">job type</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seaman-panel-modal">See more</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applied-history-modal">Info</button>
         </div>
       </div>
-
-      <form action="#">
-        <!------------------ Modal for seaman-panel ----------------->
-        <div class="modal fade" id="seaman-panel-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      
+      
+      <!------------------ Modal for Applied History ----------------->
+      <div class="modal fade" id="applied-history-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
@@ -92,16 +76,8 @@ include 'includes/sidenav.inc.php';
                     <h6 class="mb-0">Job reqiurements:</h6>
                     <p class="job-requirements"> Full-time</p>
 
-                    <div class="user-inputs">
-                      <label for="email">Email</label>
-                      <input type="email" id="email" class="form-control" placeholder="Enter your email">
-
-                      <label for="password">Password</label>
-                      <input type="password" id="password" class="form-control" placeholder="Enter your password">
-                    </div>
-
                     <div class="actions">
-                      <button class="btn btn-primary" name="submit2">Apply</button>
+                      <button class="btn btn-primary">Cancel</button>
                     </div>
                   </div>
                 </div>
@@ -112,10 +88,8 @@ include 'includes/sidenav.inc.php';
             </div>
           </div>
         </div>
-      </form>
     </section>
   </main>
-
   <?php include 'includes/body.inc.php';?>
 </body>
 </html>

@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Step 1 Validation
     function validateStep1() {
+        const preferJob = document.getElementById("prefer_job").value.trim();
         const firstName = document.getElementById("first_name").value.trim();
         const middleName = document.getElementById("middle_name").value.trim();
         const lastName = document.getElementById("last_name").value.trim();
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("dob-error").style.display = "none";
 
         // Check if all required fields are filled
-        if (!firstName || !middleName || !lastName || !dob || !sex || !email || !cellphone || !city || !email2) {
+        if (!preferJob || !firstName || !middleName || !lastName || !dob || !sex || !email || !cellphone || !city || !email2) {
             alert("Please fill out all the fields in Step 1.");
             return false;
         }
@@ -147,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showStep(currentStep); // Go back to the previous step
         }
     });
+
 
     // Initial display
     showStep(currentStep);

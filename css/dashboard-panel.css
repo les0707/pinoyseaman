@@ -1,0 +1,663 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+  --base-clr: #11121a;
+  --line-clr: #42434a;
+  --hover-clr: #222533;
+  --text-clr: #e6e6ef;
+  --accent-clr: #5e63ff;
+  --secondary-text-clr: #b0b3c1;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-family: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5rem;
+}
+body{
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--base-clr);
+  color: var(--text-clr);
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.header {
+  background: linear-gradient(135deg, #003366, #005b99);
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 5px;
+  object-fit: contain; /* Ensures the image scales properly without distortion */
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  margin-left: 20px;
+}
+
+#sidebar {
+  box-sizing: border-box;
+  height: 100vh;
+  width: 280px;
+  padding: 5px 1em;
+  background-color: var(--base-clr);
+  border-right: 1px solid var(--line-clr);
+  position: sticky;
+  top: 0;
+  align-self: start;
+  transition: 300ms ease-in-out;
+  overflow: hidden;
+  text-wrap: nowrap;
+  z-index: 1000; /* Ensures the sidebar stays on top */
+}
+
+#sidebar.close {
+  padding: 5px;
+  width: 60px;
+}
+
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar > ul > li:first-child {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Space between logo and button */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Increased space between logo and toggle button */
+  transition: opacity 300ms ease-in-out; /* Fade out when collapsed */
+}
+
+.logo img {
+  max-height: 40px;
+  width: auto;
+}
+
+#toggle-btn {
+  padding: 0.5em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5em;
+  position: absolute;
+  right: 15px; /* Align toggle button to the right next to the logo */
+}
+
+#toggle-btn svg {
+  transition: rotate 150ms ease;
+  fill: var(--text-clr);
+}
+
+#toggle-btn:hover {
+  background-color: var(--hover-clr);
+}
+
+#sidebar a,
+#sidebar .dropdown-btn,
+#sidebar {
+  border-radius: 0.5em;
+  padding: 0.85em;
+  text-decoration: none;
+  color: var(--text-clr);
+  display: flex;
+  gap: 1em;
+}
+
+#sidebar .dropdown-btn {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+#sidebar svg {
+  flex-shrink: 0;
+  fill: var(--text-clr);
+}
+
+#sidebar a span,
+#sidebar .dropdown-btn span {
+  flex-grow: 1;
+}
+
+#sidebar a:hover,
+#sidebar .dropdown-btn:hover {
+  background-color: var(--hover-clr);
+}
+
+#sidebar .sub-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: 300ms ease-in-out;
+
+  > div {
+    overflow: hidden;
+  }
+}
+
+#sidebar .sub-menu.show {
+  grid-template-rows: 1fr;
+}
+
+.dropdown-btn svg {
+  transition: 200ms ease;
+}
+
+.rotate svg:last-child {
+  rotate: 180deg;
+}
+
+#sidebar .sub-menu a {
+  padding-left: 2em;
+}
+
+/* Positioning the profile button next to Applied History */
+#sidebar .profile-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Remove absolute positioning for better flow */
+}
+
+#sidebar .profile-btn {
+  order: 5; /* Position the profile button below applied history */
+}
+
+#sidebar .dropdown-btn.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+/* Hide logo and adjust the layout when sidebar is collapsed */
+#sidebar.close .logo {
+  opacity: 0;
+  pointer-events: none; /* Prevent logo from being interactive when collapsed */
+}
+
+#sidebar ul li.active a{
+  color: var(--accent-clr);
+
+  svg{
+    fill: var(--accent-clr);
+  }
+}
+
+
+main{
+  padding: min(10px, 5%);
+}
+main p {
+  color: var(--secondary-text-clr);
+  margin-bottom: 15px;
+}
+
+.page-title{
+  text-align: center;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.container {
+  display: flex; /* Use flexbox for a responsive row layout */
+  flex-wrap: wrap; /* Allow wrapping for small screens */
+  gap: 1rem; /* Small space between cards */
+  padding: 1rem;
+  border: 1px solid var(--line-clr);
+  border-radius: 1em;
+}
+
+.card {
+  flex: 1 1 15rem; /* Allow cards to grow and shrink */
+  box-sizing: border-box; /* Include padding and borders in the size */
+}
+
+.card img {
+  height: 120px; /* Set a fixed height */
+  object-fit: fill; /* Ensure the image scales properly without distortion */
+  border-bottom: 2px solid #DDE3EC;
+}
+
+#card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(206, 204, 204, 0.2);
+  cursor: pointer;
+}
+
+.job-title-modal{
+  /*color: #212529;*/
+  color: #555;
+  font-weight: 700;
+}
+
+
+/*---------------------------------------------------- job position bugok ------------------------------------------------------*/
+
+.job-container{
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding: 1rem;
+  border: 1px solid var(--line-clr);
+  border-radius: 1em;
+  
+}
+
+.job-password{
+  border-radius: 5px;
+  width: 350px;
+  height: 35px;
+  margin: 3px 0;
+  padding: 5px;
+}
+
+.prefer-job {
+  width: 50%; /* Full width */
+  padding: 5px; /* Padding inside the select box */
+  font-size: 16px; /* Font size */
+  color: #333; /* Text color */
+  background-color: #fff; /* Background color */
+  border: 1px solid #ccc; /* Border styling */
+  border-radius: 5px; /* Rounded corners */
+  appearance: none; /* Remove default styling */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+}
+
+.prefer-job:focus {
+  outline: none; /* Remove focus outline */
+  border-color: #007BFF; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle shadow */
+}
+
+.prefer-job option {
+  color: #333; /* Text color for options */
+  padding: 5px; /* Padding for dropdown options */
+}
+
+
+.card-img{
+  height: 130px;
+  width: 130px;
+  background-color: #e6e6ef;
+  border-radius: 50%;
+  position: absolute;
+  margin: 10px auto 20px  auto;
+  left: 0;
+  right: 0;
+
+}
+.card-img img{
+  height: 86%;
+  width: 86%;
+  border-radius: 50%;
+  margin-left: 7%;
+  margin-top: 7%;
+}
+
+.primary-text{
+  color: #d5d5d5;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  margin-bottom: 10px;
+}
+.secondary-text{
+  color: #c0c0c0;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 5px 0;
+}
+
+h6{
+  margin: 0;
+}
+.desc{
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 160px;
+}
+
+.details{
+  display: flex;
+  justify-content: center;
+  display: grid;
+  width: 100%;
+  height: 65px;
+  padding: 5px 0;
+  backdrop-filter: blur(20px);
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 8px 8px;
+}
+.details>div{
+  text-align: center;
+}
+
+#job-button{
+  width: 80%;
+  padding: 15px 0;
+  position: absolute;
+  left: 10%;
+  top: 240px;
+  border-radius: 5px;
+  outline: none;
+}
+
+/*----------------------------------------------------------edit seaman profile--------------------------------------------------------*/
+
+.profile-label{
+  color: #2f3234;
+  margin-right: 5px;
+}
+.small{
+  margin-top: 10px;
+  color: #2f3234;
+  font-weight: 500;
+}
+.profile-header{
+  font-weight: 600;
+  font-size: large;
+  color: #212529;
+}
+.container-controller{
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 100%;
+}
+
+#contact-form-input {
+  height: 120px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+#contact-form-input:focus {
+  border-color: #007BFF; /* Blue border on focus */
+  background-color: #e9f7ff; /* Light blue background on focus */
+  outline: none; /* Removes the default outline */
+}
+
+#contact-form-input::placeholder {
+  color: #888; /* Light grey placeholder text */
+  font-style: italic;
+}
+
+.card {
+  box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+  color: #212529;
+  font-weight: 500;
+}
+.card-header:first-child {
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+  padding: 1rem 1.35rem;
+  margin-bottom: 0;
+  background-color: rgba(33, 40, 50, 0.03);
+  border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #69707a;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #c5ccd6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.35rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/*---------------------------------------------------------------My Profile -------------------------------------------------------*/
+
+.password-form-control{
+  width: 45%;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: .60rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.mb-0{
+  color: rgb(55, 54, 54);
+}
+
+.name-position{
+  display: inline;
+    color: rgb(55, 54, 54);
+    font-weight: 600;
+    font-size: 25px;
+}
+/*----------------------------------- modal ---------------------------------------------- */
+
+.card-body-job {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  padding-top: 0;
+}
+
+.company-name {
+  font-size: 23px;
+  margin-bottom: 10px;
+  color: rgb(55, 54, 54); 
+  font-weight: 650;
+}
+
+.job-title {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.job-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.job-banner {
+  position: relative;
+  height: 200px;
+  background-color: #f4f4f4;
+}
+
+.job-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.job-banner-text h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.job-banner-text h2 {
+  font-size: 18px;
+}
+
+.job-details {
+  padding: 20px;
+}
+
+.vessel-type, .job-description, .job-requirements{
+  font-size: 14px;
+  color: #777;
+  margin: 5px 0;
+}
+
+.user-inputs {
+  margin-top: 20px;
+}
+
+.user-inputs label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.user-inputs .form-control {
+  width: 50%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.actions .btn {
+  margin-right: 10px;
+}
+
+/*------------------------------------------- end --------------------------------------------------*/
+
+
+@media(max-width: 800px){
+  body{
+    grid-template-columns: 1fr;
+  }
+
+  .job-banner-img {
+    object-fit: contain;
+  }
+
+  .password-form-control, .prefer-job{
+    width: 100%;
+  }
+  #seaman-panel-modal, #dashboard-modal, #applied-history-modal, .modal-body {
+    margin: 0;
+    padding: 0;
+    margin-top: 2px;
+    padding-left: 0;
+  }
+  .container, .container-controller{
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 70px;
+  }
+  #sidebar{
+    height: 60px;
+    width: 100%;
+    border-right: none;
+    border-top: 1px solid var(--line-clr);
+    padding: 0;
+    position: fixed;
+    top: unset;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    
+
+    > ul{
+      padding: 10px;
+      display: grid;
+      grid-auto-columns: 60px;
+      grid-auto-flow: column;
+      align-items: center;
+      overflow-x: scroll;
+    }
+    ul li{
+      height: 100%;
+    }
+    ul a, ul .dropdown-btn{
+      width: 60px;
+      height: 60px;
+      padding: 0;
+      border-radius: 0;
+      justify-content: center;
+    }
+
+    ul li span, ul li:first-child, .dropdown-btn svg:last-child{
+      display: none;
+    }
+
+    ul li .sub-menu.show{
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      box-sizing: border-box;
+      height: 60px;
+      width: 100%;
+      background-color: var(--hover-clr);
+      border-top: 1px solid var(--line-clr);
+      display: flex;
+      justify-content: center;
+
+      > div{
+        overflow-x: auto;
+      }
+      li{
+        display: inline-flex;
+      }
+      a{
+        box-sizing: border-box;
+        padding: 1em;
+        width: auto;
+        justify-content: center;
+      }
+    }
+  }
+}
