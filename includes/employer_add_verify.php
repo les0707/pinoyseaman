@@ -97,8 +97,8 @@ if (!$row) {
                VALUES ('$newid', '$company_name', '$company_address', '$phone', '$fax', '$contact', '$email', '$email2', '$email3', '$password1', '$company_profile', DATE_ADD('$datenow', INTERVAL 7 DAY), '$website', 'companylogo.gif', ' ', 'FREE', '50', '$datenow', '$rnd_id', ' ', '$password2', NOW())";
     $result2 = mysqli_query($link, $query2);
 
-    $headers = 'From: PinoySeaman <infopinoyseaman.com>' . "\r\n" .
-               'Reply-To: PinoySeaman <infopinoyseaman.com>' . "\r\n" .
+    $headers = 'From: PinoySeaman <noreply@pinoyseaman.com>' . "\r\n" .
+               'Reply-To: PinoySeaman <noreply@pinoyseaman.com>' . "\r\n" .
                'MIME-Version: 1.0' . "\r\n" .
                'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
                'X-Mailer: PHP/' . phpversion();
