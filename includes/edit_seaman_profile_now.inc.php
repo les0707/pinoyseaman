@@ -2,6 +2,10 @@
 session_start();
 include "dbh.inc.php";
 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 if (!isset($_SESSION["seeker_id"]) || !isset($_SESSION["seeker_pass"])) {
     header("location: seaman_login.php");
     exit;
@@ -10,76 +14,96 @@ if (!isset($_SESSION["seeker_id"]) || !isset($_SESSION["seeker_pass"])) {
 $id = $_SESSION["seeker_id"];
 $pass = $_SESSION["seeker_pass"];
 
-$linksql = mysqli_connect($dbhost, $dbusername, $dbuserpassword, $dbname) or die("Error " . mysqli_error($linksql));
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cellphone = mysqli_real_escape_string($linksql, $_POST['cellphone']);
-    $month = mysqli_real_escape_string($linksql, $_POST['month']);
-    $day = mysqli_real_escape_string($linksql, $_POST['day']);
-    $year = mysqli_real_escape_string($linksql, $_POST['year']);
-    $birthday = $year . '-' . $month . '-' . $day;
-    $gender = mysqli_real_escape_string($linksql, $_POST['sex']);
-    $city = mysqli_real_escape_string($linksql, $_POST['city']);
-    $seagoing_work = mysqli_real_escape_string($linksql, $_POST['seagoing_work']);
-    $passport_country = mysqli_real_escape_string($linksql, $_POST['passport_country']);
-    $passport_no = mysqli_real_escape_string($linksql, $_POST['passport_no']);
-    $passport_issued = mysqli_real_escape_string($linksql, $_POST['passport_issued']);
-    $passport_valid = mysqli_real_escape_string($linksql, $_POST['passport_valid']);
-    $sbook_country = mysqli_real_escape_string($linksql, $_POST['sbook_country']);
-    $sbook_no = mysqli_real_escape_string($linksql, $_POST['sbook_no']);
-    $sbook_issued = mysqli_real_escape_string($linksql, $_POST['sbook_issued']);
-    $sbook_valid = mysqli_real_escape_string($linksql, $_POST['sbook_valid']);
-    $competence = mysqli_real_escape_string($linksql, $_POST['competence']);
-    $certificates = mysqli_real_escape_string($linksql, $_POST['certificates']);
-    $educ_training = mysqli_real_escape_string($linksql, $_POST['educ_training']);
-    $non_seagoing_work = mysqli_real_escape_string($linksql, $_POST['non_seagoing_work']);
-    $merits = mysqli_real_escape_string($linksql, $_POST['merits']);
-    $allow = mysqli_real_escape_string($linksql, $_POST['allow']);
-    $current_password = mysqli_real_escape_string($linksql, $_POST['passwrd']);
+    $cellphone = htmlspecialchars($_POST['cellphone']);
+    $birthday = htmlspecialchars($_POST['birthday']);
+    $gender = htmlspecialchars($_POST['gender']);
+    $city = htmlspecialchars($_POST['city']);
+    $seagoing_work = htmlspecialchars($_POST['seagoing_work']);
+    $passport_country = htmlspecialchars($_POST['passport_country']);
+    $passport_no = htmlspecialchars($_POST['passport_no']);
+    $passport_issued = htmlspecialchars($_POST['passport_issued']);
+    $passport_valid = htmlspecialchars($_POST['passport_valid']);
+    $sbook_country = htmlspecialchars($_POST['sbook_country']);
+    $sbook_no = htmlspecialchars($_POST['sbook_no']);
+    $sbook_issued = htmlspecialchars($_POST['sbook_issued']);
+    $sbook_valid = htmlspecialchars($_POST['sbook_valid']);
+    $competence = htmlspecialchars($_POST['competence']);
+    $certificates = htmlspecialchars($_POST['certificates']);
+    $educ_training = htmlspecialchars($_POST['educ_training']);
+    $non_seagoing_work = htmlspecialchars($_POST['non_seagoing_work']);
+    $merits = htmlspecialchars($_POST['merits']);
+    $view = htmlspecialchars($_POST['view']);
+    $current_password = htmlspecialchars($_POST['passwrd']);
     $encrypted_password = md5($current_password);
 
-    $query = "SELECT password FROM job_seeker WHERE email = '$id'";
-    $result = mysqli_query($linksql, $query);
-    $row = mysqli_fetch_assoc($result);
+    try {
+        $query = "SELECT password FROM job_seeker WHERE email = :email";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':email', $id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($row['password'] != $encrypted_password) {
-        echo "Current password is incorrect.";
-        exit;
+        if ($row['password'] != $encrypted_password) {
+            echo "Current password is incorrect.";
+            exit;
+        }
+
+        $update_query = "UPDATE job_seeker SET 
+            cellphone = :cellphone,
+            birthday = :birthday,
+            gender = :gender,
+            city = :city,
+            seagoing_work = :seagoing_work,
+            passport_country = :passport_country,
+            passport_no = :passport_no,
+            passport_issued = :passport_issued,
+            passport_valid = :passport_valid,
+            sbook_country = :sbook_country,
+            sbook_no = :sbook_no,
+            sbook_issued = :sbook_issued,
+            sbook_valid = :sbook_valid,
+            competence = :competence,
+            certificates = :certificates,
+            educ_training = :educ_training,
+            non_seagoing_work = :non_seagoing_work,
+            merits = :merits,
+            view = :view
+            WHERE email = :email AND password = :password";
+
+        $stmt = $pdo->prepare($update_query);
+        $stmt->bindParam(':cellphone', $cellphone);
+        $stmt->bindParam(':birthday', $birthday);
+        $stmt->bindParam(':gender', $gender);
+        $stmt->bindParam(':city', $city);
+        $stmt->bindParam(':seagoing_work', $seagoing_work);
+        $stmt->bindParam(':passport_country', $passport_country);
+        $stmt->bindParam(':passport_no', $passport_no);
+        $stmt->bindParam(':passport_issued', $passport_issued);
+        $stmt->bindParam(':passport_valid', $passport_valid);
+        $stmt->bindParam(':sbook_country', $sbook_country);
+        $stmt->bindParam(':sbook_no', $sbook_no);
+        $stmt->bindParam(':sbook_issued', $sbook_issued);
+        $stmt->bindParam(':sbook_valid', $sbook_valid);
+        $stmt->bindParam(':competence', $competence);
+        $stmt->bindParam(':certificates', $certificates);
+        $stmt->bindParam(':educ_training', $educ_training);
+        $stmt->bindParam(':non_seagoing_work', $non_seagoing_work);
+        $stmt->bindParam(':merits', $merits);
+        $stmt->bindParam(':view', $view);
+        $stmt->bindParam(':email', $id);
+        $stmt->bindParam(':password', $encrypted_password);
+
+        if ($stmt->execute()) {
+            $message = "<font color=blue>Profile updated successfully.</font>";
+            $link = "../edit_seaman_profile.php"; 
+            include "../action.php";
+            exit;
+        } else {
+            echo "Error updating profile.";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
-
-    $update_query = "UPDATE job_seeker SET 
-        cellphone = '$cellphone',
-        birthday = '$birthday',
-        gender = '$gender',
-        city = '$city',
-        seagoing_work = '$seagoing_work',
-        passport_country = '$passport_country',
-        passport_no = '$passport_no',
-        passport_issued = '$passport_issued',
-        passport_valid = '$passport_valid',
-        sbook_country = '$sbook_country',
-        sbook_no = '$sbook_no',
-        sbook_issued = '$sbook_issued',
-        sbook_valid = '$sbook_valid',
-        competence = '$competence',
-        certificates = '$certificates',
-        educ_training = '$educ_training',
-        non_seagoing_work = '$non_seagoing_work',
-        merits = '$merits',
-        view = '$allow'
-        WHERE email = '$id' AND password = '$encrypted_password'";
-
-    if (mysqli_query($linksql, $update_query)) {
-        $message = "<font color=blue>Profile updated successfully.</font>";
-        $link = "../seaman_panel.php"; 
-        include "../action.php";
-        mysqli_close($link);
-        mysqli_free_result($result);
-        exit;
-    } else {
-        echo "Error updating profile: " . mysqli_error($linksql);
-    }
-
-    mysqli_close($linksql);
 }
 ?>
