@@ -1,4 +1,22 @@
 <?php
+session_start();
+include "includes/dbh.inc.php";
+
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+if(!isset($_SESSION["seeker_id"])) {
+  header("location: seaman_login.php");
+  exit;
+}
+if(!isset($_SESSION["seeker_pass"])) {
+  header("location: seaman_login.php");
+  exit;
+}
+$id = $_SESSION["seeker_id"];
+$pass = $_SESSION["seeker_pass"];
+
 include 'includes/dashboard-header.inc.php';
 include 'includes/sidenav.inc.php';
 ?>
@@ -10,7 +28,7 @@ include 'includes/sidenav.inc.php';
               <div class="card mb-4">
                   <div class="card-header">Update Email Address</div>
                   <div class="card-body">
-                        <form action="#" method="post">
+                        <form action="includes/edit_seaman_email_now.inc.php" method="post">
                           <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-6">
@@ -31,7 +49,7 @@ include 'includes/sidenav.inc.php';
 
                           <hr>
                           <!-- Save changes button-->
-                          <button class="btn btn-primary" name="Submit" type="button">Save changes</button>
+                          <button class="btn btn-primary" name="Submit" type="submit">Save changes</button>
                         </form>
                   </div>
                 </div>
