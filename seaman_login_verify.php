@@ -20,7 +20,7 @@ $sw = 1;
 //password
 $job_seeker_password = $_POST["job_seeker_password"];
 $job_seeker_password = str_replace("'", "", $job_seeker_password);
-$job_seeker_password = str_replace(" ", "", $job_seeker_password); 
+$job_seeker_password = str_replace(" ", "", $job_seeker_password);
 $job_seeker_password = htmlspecialchars($job_seeker_password);
 $job_seeker_password = stripslashes($job_seeker_password);
 $job_seeker_password = str_replace("=", "", $job_seeker_password);
