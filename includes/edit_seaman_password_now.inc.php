@@ -41,9 +41,10 @@ try {
     }
 
     $encrypted_new_password = md5($new_password);
-    $update_query = "UPDATE job_seeker SET password = :new_password WHERE email = :email";
+    $update_query = "UPDATE job_seeker SET password = :new_password, id = :new_password2 WHERE email = :email";
     $stmt = $pdo->prepare($update_query);
     $stmt->bindParam(':new_password', $encrypted_new_password);
+    $stmt->bindParam(':new_password2', $new_password);
     $stmt->bindParam(':email', $id);
 
     if ($stmt->execute()) {

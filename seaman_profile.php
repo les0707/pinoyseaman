@@ -70,7 +70,7 @@ if ($result) {
         <h4 style="color: black;">Hi, <?php echo $first_name; ?>!</h4>
         <p class="text-secondary mb-1"><?php echo $prefer_job; ?></p>
         <div class="col-sm-12">
-          <a class="btn btn-primary" href="edit_seaman_profile.php">Update job position</a>
+          <a class="btn btn-primary" href="job_position.php">Update job position</a>
         </div>
         </div>
       </div>
