@@ -47,7 +47,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <main>
     <h1 class="page-title">Available jobs</h1>
-    <section class="container">
+    <section class="container" >
       <?php foreach ($jobs as $job): ?>
         <?php
           // Fetch the logo from the employer table
@@ -127,7 +127,6 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </div>
         </div>
     </form>
-    </section>
 
     <!-- Pagination controls -->
     <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
@@ -143,6 +142,10 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
       </ul>
     </nav>
+
+    </section>
+
+    
   </main>
 
   <?php include 'includes/body.inc.php';?>
