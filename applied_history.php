@@ -76,7 +76,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   <div class="job-details">
                     <h4 class="job-title-modal" id="modal-job-hiring">Job Title</h4>
                     <p id="confirmation-message">Are you sure you want to cancel your application at <span id="modal-company-name-confirm"></span> with the job title of <span id="modal-job-hiring-confirm"></span>?</p>
-                    <input name="cancel_code" id="modal-company-code-hidden">
+                    <input type="hidden" name="cancel_code" id="modal-company-code-hidden">
                     <div class="actions">
                       <button type="submit" class="btn btn-danger" name="submit2">Cancel Application</button>
                     </div>
