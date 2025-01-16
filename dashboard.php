@@ -96,6 +96,9 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                       <input name="job_seeker_password" type="password" id="password" class="form-control" placeholder="Enter your password">
                     </div>
 
+                    <input type="hidden" name="job_title" id="modal-job-title-hidden">
+                    <input type="hidden" name="company_code" id="modal-company-code-hidden">
+
                     <div class="actions">
                       <button type="submit" id="modal-company-code" class="btn btn-primary" name="submit2">Apply</button>
                     </div>
@@ -128,7 +131,8 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
           document.getElementById('modal-job-description').textContent = jobDescription;
           document.getElementById('modal-vessel-type').textContent = vesselType;
           document.getElementById('modal-job-requirements').textContent = jobRequirements;
-          document.getElementById('modal-company-code').value = companyCode;
+          document.getElementById('modal-job-title-hidden').value = jobTitle;
+          document.getElementById('modal-company-code-hidden').value = companyCode;
         });
       });
     });
