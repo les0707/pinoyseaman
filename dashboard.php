@@ -45,8 +45,18 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1 class="page-title">Based on your job position</h1>
     <section class="container">
       <?php foreach ($jobs as $job): ?>
+      <?php
+        // Fetch the logo from the employer table
+        $company_code = $job['company_code'];
+        $logo_query = "SELECT logo FROM employer WHERE company_code = :company_code";
+        $logo_stmt = $pdo->prepare($logo_query);
+        $logo_stmt->bindParam(':company_code', $company_code);
+        $logo_stmt->execute();
+        $logo_result = $logo_stmt->fetch(PDO::FETCH_ASSOC);
+        $logo = $logo_result ? 'logo/' . htmlspecialchars($logo_result['logo']) : 'logo/city.jpg';
+      ?>
       <div class="card" style="width: 15rem;" id="card">
-        <img src="images/city.jpg" class="card-img-top" alt="yourads2">
+        <img src="<?php echo $logo; ?>" class="card-img-top" alt="Company Logo">
         <div class="card-body-job">
           <h6 class="company-name"><?php echo htmlspecialchars($job['company_name']); ?></h6>
           <h5 class="job-title"><?php echo htmlspecialchars($job['job_title']); ?></h5>
@@ -57,7 +67,8 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   data-job-description="<?php echo htmlspecialchars($job['job_description']); ?>"
                   data-vessel-type="<?php echo htmlspecialchars($job['vessel']); ?>"
                   data-company-code="<?php echo htmlspecialchars($job['company_code']); ?>"
-                  data-job-requirements="<?php echo htmlspecialchars($job['requirements']); ?>">See more</button>
+                  data-job-requirements="<?php echo htmlspecialchars($job['requirements']); ?>"
+                  data-logo="<?php echo $logo; ?>">See more</button>
         </div>
       </div>
       <?php endforeach; ?>
@@ -125,6 +136,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
           const vesselType = this.getAttribute('data-vessel-type');
           const jobRequirements = this.getAttribute('data-job-requirements');
           const companyCode = this.getAttribute('data-company-code');
+          const logo = this.getAttribute('data-logo');
 
           document.getElementById('modal-company-name').textContent = companyName;
           document.getElementById('modal-job-title').textContent = jobTitle;
@@ -133,6 +145,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
           document.getElementById('modal-job-requirements').textContent = jobRequirements;
           document.getElementById('modal-job-title-hidden').value = jobTitle;
           document.getElementById('modal-company-code-hidden').value = companyCode;
+          document.getElementById('modal-company-logo').src = logo;
         });
       });
     });
