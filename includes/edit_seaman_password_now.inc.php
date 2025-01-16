@@ -1,5 +1,6 @@
 <?php
 session_start();
+$ip = $_SERVER['REMOTE_ADDR'];
 include "dbh.inc.php";
 
 // ini_set('display_errors', 1);
@@ -48,6 +49,13 @@ try {
     $stmt->bindParam(':email', $id);
 
     if ($stmt->execute()) {
+        // Log the action with IP address
+        $action_query = "INSERT INTO action (seaman, date, action, time, ip) VALUES (:seaman, NOW(), 'Update Seaman Password', NOW(), :ip)";
+        $action_stmt = $pdo->prepare($action_query);
+        $action_stmt->bindParam(':seaman', $id);
+        $action_stmt->bindParam(':ip', $ip);
+        $action_stmt->execute();
+
         $_SESSION["seeker_pass"] = $encrypted_new_password;
         $message = "<font color=blue>Password updated successfully.</font>";
         $link = "../seaman_profile.php";

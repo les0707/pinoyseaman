@@ -38,6 +38,12 @@ try {
     $stmt->bindParam(':email', $id);
 
     if ($stmt->execute()) {
+        // Log the action
+        $action_query = "INSERT INTO action (seaman, date, action, time) VALUES (:seaman, NOW(), 'Update Seaman Job', NOW())";
+        $action_stmt = $pdo->prepare($action_query);
+        $action_stmt->bindParam(':seaman', $id);
+        $action_stmt->execute();
+
         $message = "<font color=blue>Job position updated successfully.</font>";
         $link = "../seaman_profile.php";
     } else {

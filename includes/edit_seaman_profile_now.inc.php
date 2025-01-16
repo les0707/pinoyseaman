@@ -95,6 +95,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':password', $encrypted_password);
 
         if ($stmt->execute()) {
+            // Log the action
+            $action_query = "INSERT INTO action (seaman, date, action, time) VALUES (:seaman, NOW(), 'Update Seaman Profile', NOW())";
+            $action_stmt = $pdo->prepare($action_query);
+            $action_stmt->bindParam(':seaman', $id);
+            $action_stmt->execute();
+
             $message = "<font color=blue>Profile updated successfully.</font>";
             $link = "../edit_seaman_profile.php"; 
             include "../action.php";

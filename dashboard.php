@@ -46,17 +46,23 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section class="container">
       <?php foreach ($jobs as $job): ?>
       <div class="card" style="width: 15rem;" id="card">
-        <img src="ads/yourads2.jpg" class="card-img-top" alt="yourads2">
+        <img src="images/city.jpg" class="card-img-top" alt="yourads2">
         <div class="card-body-job">
           <h6 class="company-name"><?php echo htmlspecialchars($job['company_name']); ?></h6>
           <h5 class="job-title"><?php echo htmlspecialchars($job['job_title']); ?></h5>
           <p class="card-text"><?php echo htmlspecialchars($job['job_description']); ?></p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dashboard-modal">See more</button>
+          <button type="button" class="btn btn-primary see-more-btn" data-toggle="modal" data-target="#dashboard-modal"
+                  data-company-name="<?php echo htmlspecialchars($job['company_name']); ?>"
+                  data-job-title="<?php echo htmlspecialchars($job['job_title']); ?>"
+                  data-job-description="<?php echo htmlspecialchars($job['job_description']); ?>"
+                  data-vessel-type="<?php echo htmlspecialchars($job['vessel']); ?>"
+                  data-company-code="<?php echo htmlspecialchars($job['company_code']); ?>"
+                  data-job-requirements="<?php echo htmlspecialchars($job['requirements']); ?>">See more</button>
         </div>
       </div>
       <?php endforeach; ?>
     </section>
-    <form action="#">
+    <form action="includes/apply_for_this_job_verify.inc.php" method="post">
       <!------------------ Modal for dashboard ----------------->
       <div class="modal fade" id="dashboard-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -70,17 +76,17 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <div class="modal-body">
                 <div class="job-card">
                   <div class="header">
-                    <img src="images/wallem_logo.jpg" alt="Company Logo">
-                    <h1>Pacific Ocean Manning, Inc.</h1>
+                    <img src="images/wallem_logo.jpg" alt="Company Logo" id="modal-company-logo">
+                    <h1 id="modal-company-name">Pacific Ocean Manning, Inc.</h1>
                   </div>
                   <div class="job-details">
-                    <h4 class="job-title-modal">Software Developer (Fresh Grads)</h4>
+                    <h4 class="job-title-modal" id="modal-job-title">Software Developer (Fresh Grads)</h4>
                     <h6 class="mb-0">Vessel Type: </h6>
-                    <p class="job-description">cargo type</p>
+                    <p class="job-description" id="modal-vessel-type">cargo type</p>
                     <h6 class="mb-0">Job description:</h6>
-                    <p class="job-description"> Developers/Programmers (Information &amp; Communication Technology)</p>
-                    <h6 class="mb-0">Job reqiurements:</h6>
-                    <p class="job-requirements"> Full-time</p>
+                    <p class="job-description" id="modal-job-description"> Developers/Programmers (Information &amp; Communication Technology)</p>
+                    <h6 class="mb-0">Job requirements:</h6>
+                    <p class="job-requirements" id="modal-job-requirements"> Full-time</p>
 
                     <div class="user-inputs">
                       <label for="email">Email</label>
@@ -91,7 +97,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="actions">
-                      <button class="btn btn-primary" name="submit2">Apply</button>
+                      <button type="submit" id="modal-company-code" class="btn btn-primary" name="submit2">Apply</button>
                     </div>
                   </div>
                 </div>
@@ -105,5 +111,27 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </form>
   </main>
   <?php include 'includes/body.inc.php';?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const seeMoreButtons = document.querySelectorAll('.see-more-btn');
+      seeMoreButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const companyName = this.getAttribute('data-company-name');
+          const jobTitle = this.getAttribute('data-job-title');
+          const jobDescription = this.getAttribute('data-job-description');
+          const vesselType = this.getAttribute('data-vessel-type');
+          const jobRequirements = this.getAttribute('data-job-requirements');
+          const companyCode = this.getAttribute('data-company-code');
+
+          document.getElementById('modal-company-name').textContent = companyName;
+          document.getElementById('modal-job-title').textContent = jobTitle;
+          document.getElementById('modal-job-description').textContent = jobDescription;
+          document.getElementById('modal-vessel-type').textContent = vesselType;
+          document.getElementById('modal-job-requirements').textContent = jobRequirements;
+          document.getElementById('modal-company-code').value = companyCode;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
