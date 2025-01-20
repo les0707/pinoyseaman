@@ -15,7 +15,7 @@ include 'includes/nav.php';
 
         <div class="seaman-registration-form"> 
         <!------------------------------ form --------------------------->
-            <form action="seaman_login_verify2.php" method="post"  name="seaman1" id="seaman1" onsubmit="return validateForm_add_seaman()">
+            <form action="seaman_login_verify.php" method="post"  name="seaman1" id="seaman1" onsubmit="return validateForm_add_seaman()">
                 <div class="formbold-form-step-1 active">
                     <div class="formbold-input-flex">
                         <div>
