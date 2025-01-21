@@ -1,5 +1,4 @@
-// change
-//This js is for add_seaman.php 3 way process. It contains code for next button, validation and others.
+// This js is for add_seaman.php 3 way process. It contains code for next button, validation and others.
 document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.getElementById("next-button");
     const backButton = document.querySelector(".formbold-back-btn");
@@ -7,25 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const stepMenuItems = document.querySelectorAll(".formbold-step-menu1, .formbold-step-menu2, .formbold-step-menu3"); // Selecting step menu items
     const submitButton = document.getElementById("submit-button"); // Submit button
     let currentStep = 0;
-  
+
     // Step navigation function
     function showStep(stepIndex) {
         steps.forEach((step, index) => {
             step.classList.toggle("active", index === stepIndex); // Show active step
         });
-  
+
         // Update step menu highlighting
         stepMenuItems.forEach((item, index) => {
             item.classList.toggle("active", index === stepIndex); // Highlight the active step in the menu
         });
-  
+
         // Show or hide the "Back" button
         if (currentStep > 0) {
-            backButton.style.display = "inline-block"; // Show the Back button on Step 2 and 3~
+            backButton.style.display = "inline-block"; // Show the Back button on Step 2 and 3
         } else {
             backButton.style.display = "none"; // Hide the Back button on Step 1
         }
-  
+
         // Hide the Next button on Step 3 and show the Submit button
         if (currentStep === 2) {
             nextButton.style.display = "none"; // Hide Next button on Step 3
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             submitButton.style.display = "none"; // Hide Submit button on Step 1 and 2
         }
     }
-  
+
     // Step 1 Validation
     function validateStep1() {
         const preferJob = document.getElementById("prefer_job").value.trim();
@@ -48,31 +47,31 @@ document.addEventListener("DOMContentLoaded", function () {
         const cellphone = document.getElementById("cellphone").value.trim();
         const city = document.getElementById("city").value.trim();
         const email2 = document.getElementById("email2").value.trim();
-  
+
         // Clear previous error messages
         document.getElementById("dob-error").style.display = "none";
-  
+
         // Check if all required fields are filled
         if (!preferJob || !firstName || !middleName || !lastName || !dob || !sex || !email || !cellphone || !city || !email2) {
             alert("Please fill out all the fields in Step 1.");
             return false;
         }
-  
+
         // Validate DOB (check if year is 4 digits)
         if (dob.length !== 10 || !/^\d{4}-\d{2}-\d{2}$/.test(dob)) {
             document.getElementById("dob-error").style.display = "block";
             return false;
         }
-  
+
         // Check if email addresses match
         if (email !== email2) {
             alert("The emails do not match.");
             return false;
         }
-  
+
         return true;
     }
-  
+
     // Step 2 Validation (Passport & Seaman's Book)
     function validateStep2() {
         const passportCountry = document.getElementById("passport_country").value.trim();
@@ -83,15 +82,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const sbookNo = document.getElementById("sbook_no").value.trim();
         const sbookIssued = document.getElementById("sbook_issued").value.trim();
         const sbookValid = document.getElementById("sbook_valid").value.trim();
-  
+
         if (!passportCountry || !passportNo || !passportIssued || !passportValid || !sbookCountry || !sbookNo || !sbookIssued || !sbookValid) {
             alert("Please fill out all passport and seaman's book fields.");
             return false;
         }
-  
+
         return true;
     }
-  
+
     // Step 3 Validation (Work Experiences and File Uploads)
     function validateStep3() {
         const seagoingWork = document.getElementById("seagoing_work").value.trim();
@@ -101,54 +100,24 @@ document.addEventListener("DOMContentLoaded", function () {
         const competence = document.getElementById("competence").value.trim();
         const certificates = document.getElementById("certificates").value.trim();
         const termsChecked = document.getElementById("view").checked && document.getElementById("ab").checked;
-  
+
         if (!seagoingWork || !nonSeagoingWork || !educTraining || !merits || competence === 0 || certificates === 0) {
             alert("Please fill out all work experience and upload necessary files.");
             return false;
         }
-  
+
         if (!termsChecked) {
             alert("You must agree to the terms and conditions.");
             return false;
         }
-  
+
         return true;
     }
-  
-    // Submit form via AJAX
-    function submitForm() {
-        const formData = new FormData(document.getElementById("register_seaman")); // FormData for uploading files
-        const loader = document.getElementById("loader");
 
-        // Show loader before starting the request
-        loader.style.display = "block";
-  
-        fetch('includes/add_seaman_now.inc.php', { // Change this to the PHP script that handles form submission
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json()) // Expecting JSON response
-        .then(data => {
-
-            // Hide loader after receiving response
-            loader.style.display = "none";
-
-            if (data.success) {
-                alert("Registration successful! \nPlease check your email (also Spam folder) for your auto-generated password.");
-                window.location.href = 'index.php';
-            } else {
-                alert("Error: " + data.message);
-            }
-        })
-        .catch(error => {
-            alert("Error submitting form: " + error);
-        });
-    }
-  
     // Next Button Event
     nextButton.addEventListener("click", function (event) {
         event.preventDefault(); // Prevent default form submission
-  
+
         // Validate based on the current step
         if (currentStep === 0) {
             if (validateStep1()) {
@@ -162,17 +131,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-  
+
     // Submit Button Event (Step 3)
     submitButton.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default form submission
-  
         // Validate Step 3 before submitting
-        if (validateStep3()) {
-            submitForm(); // Submit form via AJAX
+        if (!validateStep3()) {
+            event.preventDefault(); // Prevent default form submission if validation fails
         }
     });
-  
+
     // Back Button Event
     backButton.addEventListener("click", function (event) {
         event.preventDefault();
@@ -182,174 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+
     // Initial display
     showStep(currentStep);
-
-    var x, i, j, l, ll, selElmnt, a, b, c;
-
-    x = document.getElementsByClassName("custom-select");
-    l = x.length;
-
-    for (i = 0; i < l; i++) {
-        selElmnt = x[i].getElementsByTagName("select")[0];
-        ll = selElmnt.length;
-
-        // Create the selected item div
-        a = document.createElement("DIV");
-        a.setAttribute("class", "select-selected");
-        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-        x[i].appendChild(a);
-
-        // Create the list of options
-        b = document.createElement("DIV");
-        b.setAttribute("class", "select-items select-hide");
-
-        for (j = 1; j < ll; j++) {
-            c = document.createElement("DIV");
-            c.innerHTML = selElmnt.options[j].innerHTML;
-
-            // Add event listener for item selection
-            c.addEventListener("click", function(e) {
-
-        /*look for any elements with the class "custom-select":*/
-        x = document.getElementsByClassName("custom-select");
-        l = x.length;
-        for (i = 0; i < l; i++) {
-          selElmnt = x[i].getElementsByTagName("select")[0];
-          ll = selElmnt.length;
-          /*for each element, create a new DIV that will act as the selected item:*/
-          a = document.createElement("DIV");
-          a.setAttribute("class", "select-selected");
-          a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-          x[i].appendChild(a);
-          /*for each element, create a new DIV that will contain the option list:*/
-          b = document.createElement("DIV");
-          b.setAttribute("class", "select-items select-hide");
-          for (j = 1; j < ll; j++) {
-            /*for each option in the original select element,
-            create a new DIV that will act as an option item:*/
-            c = document.createElement("DIV");
-            c.innerHTML = selElmnt.options[j].innerHTML;
-            c.addEventListener("click", function(e) {
-                /*when an item is clicked, update the original select box,
-                and the selected item:*/
-
-                var y, i, k, s, h, sl, yl;
-                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                sl = s.length;
-                h = this.parentNode.previousSibling;
-
-
-                for (i = 0; i < sl; i++) {
-                    if (s.options[i].innerHTML == this.innerHTML) {
-                        s.selectedIndex = i;
-                        h.innerHTML = this.innerHTML;
-                        y = this.parentNode.getElementsByClassName("same-as-selected");
-                        yl = y.length;
-
-                        for (k = 0; k < yl; k++) {
-                            y[k].removeAttribute("class");
-                        }
-                        this.setAttribute("class", "same-as-selected");
-                        break;
-                    }
-                }
-                h.click();
-            });
-
-            b.appendChild(c);
-        }
-
-        x[i].appendChild(b);
-
-        // Toggle the visibility of the options when the selected item is clicked
-        a.addEventListener("click", function(e) {
-            e.stopPropagation();
-            closeAllSelect(this);
-            this.nextSibling.classList.toggle("select-hide");
-            this.classList.toggle("select-arrow-active");
-        });
-    }
-
-    // Close all select boxes when clicking outside
-    document.addEventListener("click", closeAllSelect);
-
-    function closeAllSelect(elmnt) {
-        var x, y, i, xl, yl, arrNo = [];
-        x = document.getElementsByClassName("select-items");
-        y = document.getElementsByClassName("select-selected");
-        xl = x.length;
-        yl = y.length;
-
-        for (i = 0; i < yl; i++) {
-            if (elmnt == y[i]) {
-                arrNo.push(i);
-            } else {
-                y[i].classList.remove("select-arrow-active");
-            }
-        }
-
-        for (i = 0; i < xl; i++) {
-            if (arrNo.indexOf(i)) {
-                x[i].classList.add("select-hide");
-            }
-        }
-    }
-  
-
-                for (i = 0; i < sl; i++) {
-                  if (s.options[i].innerHTML == this.innerHTML) {
-                    s.selectedIndex = i;
-                    h.innerHTML = this.innerHTML;
-                    y = this.parentNode.getElementsByClassName("same-as-selected");
-                    yl = y.length;
-                    for (k = 0; k < yl; k++) {
-                      y[k].removeAttribute("class");
-                    }
-                    this.setAttribute("class", "same-as-selected");
-                    break;
-                  }
-                }
-                h.click();
-            });
-            b.appendChild(c);
-          }
-          x[i].appendChild(b);
-          a.addEventListener("click", function(e) {
-              /*when the select box is clicked, close any other select boxes,
-              and open/close the current select box:*/
-              e.stopPropagation();
-              closeAllSelect(this);
-              this.nextSibling.classList.toggle("select-hide");
-              this.classList.toggle("select-arrow-active");
-            });
-        }
-        function closeAllSelect(elmnt) {
-          /*a function that will close all select boxes in the document,
-          except the current select box:*/
-          var x, y, i, xl, yl, arrNo = [];
-          x = document.getElementsByClassName("select-items");
-          y = document.getElementsByClassName("select-selected");
-          xl = x.length;
-          yl = y.length;
-          for (i = 0; i < yl; i++) {
-            if (elmnt == y[i]) {
-              arrNo.push(i)
-            } else {
-              y[i].classList.remove("select-arrow-active");
-            }
-          }
-          for (i = 0; i < xl; i++) {
-            if (arrNo.indexOf(i)) {
-              x[i].classList.add("select-hide");
-            }
-          }
-        }
-        /*if the user clicks anywhere outside the select box,
-        then close all select boxes:*/
-        document.addEventListener("click", closeAllSelect);
-
-  });
-  
-
-  
+});

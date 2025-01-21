@@ -101,21 +101,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Send emails using PHPMailer
         $mail = new PHPMailer(true);
         try {
-            // SMTP Configuration
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'esclanda97@gmail.com'; // Your Gmail email
-            $mail->Password = 'vfqm lavl njrx hiqr';   // Gmail App Password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            // Use mail function
+            $mail->isMail();
 
             // Sender (No-reply email)
             $mail->setFrom('no-reply@pinoyseaman.com', 'PinoySeaman');
             $mail->addReplyTo('no-reply@pinoyseaman.com', 'PinoySeaman');
 
             // Send email to user
-            // $mail->setFrom('esclanda97@gmail.com', 'PinoySeaman');
             $mail->addAddress($email, $contact);
             $mail->isHTML(true);
             $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";

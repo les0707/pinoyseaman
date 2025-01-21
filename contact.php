@@ -17,7 +17,7 @@ include 'includes/nav.php';
                 <h2>Send Message to pinoyseaman.com</h2>
                     <hr>
     <!------------------------------ form --------------------------->
-          <form action="message_verify.php" method="post">
+          <form action="includes/message_verify.inc.php" method="post">
               <div class="formbold-form-step-1 active">
                 <div class="formbold-input-flex">
                     <div>

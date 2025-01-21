@@ -36,8 +36,8 @@ nav .logo{
     overflow: hidden;  
 }
 
-
 /*----------top banner styling------------*/
+
 .banner-container {
     width: 100%;
     height: auto;
@@ -60,10 +60,9 @@ nav .logo{
 }
 
 .first-banner img {
-    width: 510px; /* Force the image width to 510px */
-    height: 182px; /* Force the image height to 182px */
+    width: 100%; /* Make images fill the container width */
+    height: 100%; /* Allow height to adjust proportionally */
     object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
-    display: block; /* Remove inline spacing if any */
     
 }
 
@@ -77,13 +76,11 @@ nav .logo{
 }
 
 .second-banner img {
-    width: 400px; /* Force the image width to 510px */
-    height: 182px; /* Force the image height to 182px */
+    width: 100%; /* Make images fill the container width */
+    height: 100%; /* Allow height to adjust proportionally */
     object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
-    display: block; /* Remove inline spacing if any */
-}
+}    
     
-
 .main-content {  
     width: 100%;
     height: auto;
@@ -115,7 +112,7 @@ nav .logo{
 }
 
 .company-post-container {
-    height: 40px;
+    height: auto;
     width: 100%;
     padding-left: 10px;
     display: flex;
@@ -124,6 +121,7 @@ nav .logo{
     align-items: center; 
     box-sizing: border-box; 
     overflow: hidden; 
+    margin: 1%;
 }
 
 .seaman-registration-form{
@@ -907,213 +905,6 @@ h3{
 }
 
 
-
-/*------------------------------------------- Responsive Adjustments for laptop----------------------------------------------*/
-@media (max-width: 1024px) {
-    nav {
-        flex-wrap: wrap; 
-        justify-content: center; 
-        padding: 10px;
-    }
-
-    nav ul {
-        flex-wrap: wrap; 
-        justify-content: center; 
-    }
-
-    nav ul li {
-        margin: 5px 10px; 
-    }
-
-    /*------------banner container------------*/
-
-   
-
-    .first-banner, .second-banner {
-        padding: 3px;
-        width: 80%; 
-    }
-
-    /*-----------company content-----------*/
-
-    .company-content a{
-        width: 100%;
-        font-size: 16px; 
-    }
-
-    .company-header-container {
-        height: auto;
-        font-size: 18px; 
-        padding: 5px;
-    }
-
-    .company-post-container span{
-        padding-left: 5px; 
-        gap: 5px;
-        font-size: 12px; 
-    }
-
-    .hiring-container {
-        flex-direction: column;
-        align-items: flex-start;
-
-    }
-
-    .hiring-content {
-        width: 100%;
-        padding-left: 10px;
-        border-bottom: 2px solid #DDE3EC;
-    }
-
-    .company-post-container a {
-        font-size: 16px; 
-    }
-
-    /*------------ Side content ----------*/
-    .side-content {
-        width: 100%;
-        padding: 0 10px; 
-    }
-
-    .employer{
-        width: 100%; 
-        font-size: 18px; 
-        height: 200px;
-    }
-    .database,
-    .random-images,
-    .ads-container {
-        width: 100%; 
-        font-size: 18px; 
-    }
-
-    .image-container {
-        max-width: 100%; 
-        display: flex;
-        justify-content: center; 
-        object-fit: contain;
-      }
-
-    .image-container img {
-        width: 100%; 
-        height: auto; 
-    }
-
-
-    .submit-photo{
-        margin-top: 135px;
-    }
-
-    .input-fields {
-        font-size: 14px; 
-        width: 100%;
-        padding: 10px;
-    }
-
-    .advertisement {
-        width: 100%; 
-        font-size: 14px; 
-    }
-
-    /*-------------- JOB SEARCH RESPONSIVE -------------*/
-   
-    .header-content {
-        overflow-x: auto;
-    }
-
-     .header-content th {
-        font-size: 20px;  
-        padding: 10px;
-    }
-
-    .job-content .row div {
-        text-align: left;  
-        padding: 10px 0;
-    }
-
-    /*----------------- ADD EMPLOYER RESPONSIVE ----------------*/
-    
-    .employer-content a{
-        width: 100%;
-        font-size: 16px; 
-    }
-
-    .employer-header {
-        font-size: 18px; 
-    }
-    
-    .company-post-container {
-        flex-direction: column;
-        padding-left: 10px;
-        gap: 5px;
-        height: auto;
-    }
-
-    .company-post-container span{
-        padding-left: 5px; 
-        gap: 5px;
-        font-size: 12px; 
-    }
-
-    .employer-list-content {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 5px;
-    }
-
-    .employer-list-content a{
-        width: 100%;
-        font-size: 16px; 
-    }
-
-    .add-seaman-banner {
-        width: 100%; 
-        max-width: 100%; 
-    }
-    
-    .seaman-registration-form{
-        width: 100%;
-    }
-
-    .select-selected div{
-        width: 100%;
-    }
-    .custom-select {
-        width: 80%; 
-    }
-
-    .formbold-input-flex {
-        gap: 15px;
-    }
-
-    .formbold-form-input{
-        width: 100%;
-    }
-
-    .formbold-steps ul {
-        gap: 30px;
-    }
-
-    .formbold-btn,
-    .formbold-back-btn {
-        width: auto; 
-    }
-
-    .btn-form input[type="submit"] {
-        width: 70%; /* Adjust the width for smaller screens */
-    }
-
-    .employer-register{
-        width: auto;
-    }
-
-    .side-input {
-        width: 100%;
-        height: 25%;
-    }
-    
-}
-
 /*-------------------------------------------------------Tablet-----------------------------------------------------*/
 
 @media (max-width: 768px) {
@@ -1131,15 +922,25 @@ h3{
     nav ul li {
         margin: 5px 10px; 
     }
+    
 
     /*------------banner container------------*/
-
-
-    .first-banner, .second-banner {
-        padding: 3px;
-        width: 95%; 
-        font-size: 24pt; 
+    .banner-container{
+        gap: 5px;
+        padding: 5px;
     }
+    
+    .first-banner, .second-banner {
+        width: 100%; /* Make both banners the same width */
+        height: auto; /* Adjust height proportionally to content */
+    }
+
+    .first-banner img, .second-banner img {
+        width: 100%; /* Ensure images fill the container width */
+        height: auto; /* Maintain the aspect ratio */
+        object-fit: cover;
+    }
+
 
     /*-----------company content-----------*/
 
@@ -1263,10 +1064,8 @@ h3{
         font-size: 16px; 
     }
 
-    .add-seaman-banner{
-        width: 100%; 
-        margin-left: 7px;
-        margin-right: 7px;
+    .add-seaman-banner {
+        display: none;
     }
 
     .seaman-registration-form{
@@ -1340,18 +1139,6 @@ h3{
         margin: 5px 10px; 
     }
 
-    /*------------banner container------------*/
-
-
-    .first-banner{
-        padding: 5px;
-        width: 100%; 
-    }
-    
-    .second-banner{
-        padding: 5px;
-        width: 100%; 
-    }
 
     /*-----------company content-----------*/
 
@@ -1473,10 +1260,8 @@ h3{
         font-size: 14px; /* Smaller font size for links */
     }
 
-    .add-seaman-banner{
-        width: 100%; 
-        margin-left: 7px;
-        margin-right: 7px;
+    .add-seaman-banner {
+        display: none;
     }
 
     .seaman-registration-form{

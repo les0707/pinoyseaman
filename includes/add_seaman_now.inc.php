@@ -1,11 +1,6 @@
 <!-- changed -->
 
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieving form data
     $prefer_job = trim($_POST["prefer_job"]);
@@ -82,19 +77,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         require_once "dbh.inc.php";
 
-        // Check for duplicate entries
-        $checkQuery = "SELECT COUNT(*) FROM job_seeker WHERE first_name = ? AND middle_name = ? AND last_name = ? AND cellphone = ?";
+        // Check for duplicate entries by email
+        $checkQuery = "SELECT COUNT(*) FROM job_seeker WHERE email = ?";
         $checkStmt = $pdo->prepare($checkQuery);
-        $checkStmt->execute([$first_name, $middle_name, $last_name, $cellphone]);
+        $checkStmt->execute([$email]);
 
         $recordExists = $checkStmt->fetchColumn();
 
         if ($recordExists > 0) {
             // Duplicate record found
-            echo json_encode([
-                "success" => false,
-                "message" => "Duplicate entry detected: You have already submitted this form."
-            ]);
+            $link = "../add_seaman.php";
+            $message = "<font color='red'>Duplicate entry detected: This email is already registered.</font>";
+            include "../action.php";
             exit;
         }
 
@@ -113,79 +107,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdo = null;
         $stmt = null;
 
-        // Send emails using PHPMailer
-        $mail = new PHPMailer(true);
-        try {
-            // SMTP Configuration
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'esclanda97@gmail.com'; // Your Gmail email
-            $mail->Password = 'vfqm lavl njrx hiqr';   // Gmail App Password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+        // Send emails using mail() function
+        $to = $email;
+        $subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
+        $message = "
+            <p>Hello $first_name,</p>
+            <p>Welcome to PinoySeaman! Your account has been created successfully.</p>
+            <p>Your email: <strong>$email</strong></p>
+            <p>Your Auto Generated Password: <strong>$newid</strong></p>
+            <p>Please login to your account and update your password to something that you can easily remember.</p>";
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: <no-reply@pinoyseaman.com>' . "\r\n";
 
-            // Sender (No-reply email)
-            $mail->setFrom('no-reply@pinoyseaman.com', 'PinoySeaman');
-            $mail->addReplyTo('no-reply@pinoyseaman.com', 'PinoySeaman');
+        mail($to, $subject, $message, $headers);
 
-            // Send email to user
-            // $mail->setFrom('esclanda97@gmail.com', 'PinoySeaman');
-            $mail->addAddress($email, $first_name);
-            $mail->isHTML(true);
-            $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
-            $mail->Body = "
-                <p>Hello $first_name,</p>
-                <p>Welcome to PinoySeaman! Your account has been created successfully.</p>
-                <p>Your email: <strong>$email</strong></p>
-                <p>Your password: <strong>$newid</strong></p>
-                <p>Thank you for joining us!</p>";
+        // Send email to admin
+        $to = 'esclanda97@gmail.com';
+        $subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
+        $message = "
+            <p>A new seaman has registered on PinoySeaman:</p>
 
-            $mail->send();
+            <p>Preferred Job : $prefer_job</p>
+            <p>First Name : $first_name</p>
+            <p>Middle Name : $middle_name</p>
+            <p>Last Name: $last_name</p>
+            <p>Birthdate : $date</p>
+            <p>Gender : $sex</p>
+            <p>City : $city</p>
+            <p>Cellphone : $cellphone</p>
+            <p> </p>
+            <p>Email : $email</p>
+            <p>PinoySeaman ID : $newpassword</p>
+            <p>Password : $newid</p>
+            <p> </p>
+            <p>Seagoing Work : $seagoing_work</p>
+            <p> </p>
+            <p>Passport Country : $passport_country</p>
+            <p>Passport Number : $passport_no</p>
+            <p>Passport Issued : $passport_issued</p>
+            <p>Passport Valid : $passport_valid</p>
+            <p> </p>
+            <p>Seaman's Book Country : $sbook_country</p>
+            <p>Seaman's Book Number : $sbook_no</p>
+            <p>Seaman's Book Issued : $sbook_issued</p>
+            <p>Seaman's Book Valid : $sbook_valid</p>
+            <p> </p>
+            <p>Competence : $competence</p>
+            <p> </p>
+            <p>Certificates : $certificates</p>
+            <p> </p>
+            <p>Education and Training : $educ_training</p>
+            <p> </p>
+            <p>Non Seagoing Work : $non_seagoing_work</p>
+            <p> </p>
+            <p>Merits : $merits</p>";
 
-            // Send email to admin
-            $mail->clearAddresses(); // Clear recipient list
-            $mail->addAddress('esclanda97@gmail.com'); // Admin email
-            $mail->Subject = "From: PinoySeaman <no-reply@pinoyseaman.com>";
-            $mail->Body = "
-                <p>A new seaman has registered on PinoySeaman:</p>
-                <p>Name: $first_name $middle_name $last_name</p>
-                <p>Email: $email</p>
-                <p>Cellphone: $cellphone</p>
-                <p>ID: $newid</p>";
+        mail($to, $subject, $message, $headers);
 
-            $mail->send();
-
-            // Return success response
-            echo json_encode([
-                "success" => true,
-                "message" => "Form submitted successfully and emails have been sent."
-            ]);
-            exit;
-
-        } catch (Exception $e) {
-            echo json_encode([
-                "success" => false,
-                "message" => "Email error: {$mail->ErrorInfo}"
-            ]);
-            exit;
-        }
+        // Return success response
+        $link = "../add_seaman.php";
+        $message = "<font color='green'>Form submitted successfully and emails have been sent.</font>";
+        include "../action.php";
+        exit;
 
     } catch (PDOException $e) {
         // Handle query errors
-        echo json_encode([
-            "success" => false,
-            "message" => "Database error: " . $e->getMessage()
-        ]);
+        $link = "../add_seaman.php";
+        $message = "<font color='red'>Database error: " . $e->getMessage() . "</font>";
+        include "../action.php";
         exit;
     }
 
 } else {
     // Handle invalid request method
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid request method."
-    ]);
+    $link = "../add_seaman.php";
+    $message = "<font color='red'>Invalid request method.</font>";
+    include "../action.php";
     exit;
 }
 ?>
