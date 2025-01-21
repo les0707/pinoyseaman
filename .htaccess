@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^pinoyseaman.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www.pinoyseaman.com$
+RewriteRule ^/?$ "http\:\/\/www\.pinoyseaman\.com\/v2" [R=301,L]
