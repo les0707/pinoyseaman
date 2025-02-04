@@ -11,7 +11,7 @@
               <input class="side-input" name="employer_id" id="employer_id" type="text">
               <label>Password: </label>
               <input class="side-input" name="employer_password" id="employer_password" type="password">
-              <input class="side-button" type="submit" value="Login" name="submit" id="submit">
+              <button class="side-button" type="submit" value="Login" name="submit" id="submit">Login</button>
               <a href="employer_help.php">Forgot Employer ID/Password?</a><br>
               <a href="add_employer.php">Register Now</a>
             </div>
@@ -32,7 +32,7 @@
             <input class="side-input" name="job_seeker_id" id="job_seeker_id" type="text">
             <label>Password: </label>
             <input class="side-input" name="job_seeker_password" id="job_seeker_password" type="password">
-            <input class="side-button" type="submit" value="Login" name="submit">
+            <button class="side-button" type="submit" value="Login" name="submit">Login</button>
             <a href="seaman_help.php">Forgot your Password?</a><br>
             <a href="add_seaman.php">Register Now</a>
           </div>
@@ -106,9 +106,9 @@
 
 
     <div class="random-images">
-      <!--container random images-->
-      <div class="category">
-        <strong>Random Images</strong>
+        <div class="category">
+          <strong>Random Images</strong>
+        </div>
         <div class="image-container">
           <?php
           $folder = 'seaman_pics/';
@@ -121,7 +121,6 @@
           ?>
           <img src="<?php echo htmlspecialchars($randomImage); ?>" alt="Random Image">
         </div>
-      </div>
     </div>
 
 
@@ -129,7 +128,7 @@
       <a href="">Submit a photo</a>
     </div>
 
-    <div class="category">
+    <div class="advertise">
       <strong>Advertisement</strong>
     </div>
 

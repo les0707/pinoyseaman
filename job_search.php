@@ -13,10 +13,10 @@ include 'includes/nav.php'
                 <table>
                     <thead>
                         <tr>
-                            <th>Company</th>
-                            <th>Job Position</th>
-                            <th>Ad Expiry</th>
-                            <th>Action</th>
+                        <th class="company">Company</th>
+                        <th class="job-position">Job Position</th>
+                        <th class="ad-expiry">Ad Expiry</th>
+                        <th class="action">Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -64,7 +64,7 @@ include 'includes/nav.php'
                     $job_code = isset($row["job_title"]) ? urlencode($row["job_title"]) : '';
                 ?>
                     <div class="row">
-                        <div><?php echo $company_name; ?></div>
+                        <div class="company-name"><?php echo $company_name; ?></div>
                         <div><?php echo $job_title; ?></div>
                         <div class="date"><?php echo $expiry; ?></div>
                         <div>
